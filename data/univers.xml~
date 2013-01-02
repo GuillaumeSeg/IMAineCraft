@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+
+<univers>
+	<cube position="2 2 1"></cube>
+	<cube position="4 2 3"></cube>
+	<cube position="5 1 8"></cube>
+	<cube position="8 1 1"></cube>
+	<cube position="1 2 5"></cube>
+	<cube position="9 1 1"></cube>
+	<cube position="2 2 8"></cube>
+	<cube position="2 2 7"></cube>
+	<cube position="3 5 1"></cube>
+</univers>

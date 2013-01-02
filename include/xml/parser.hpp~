@@ -1,0 +1,8 @@
+#ifndef PARSER__HPP
+#define PARSER__HPP
+
+#include "../../include/tinyxml/tinyxml.h"
+
+void chargementXML();
+
+#endif
