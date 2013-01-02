@@ -12,6 +12,8 @@
 #include "imac2gl3/shapes/Cube.hpp"
 #include "../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../include/imac2gl3/MatrixStack.hpp"
+#include "../include/imac2gl3/cameras/FreeFlyCamera.hpp"
+#include "../include/imac2gl3/cameras/TrackBallCamera.hpp"
 
 #define FRAME_RATE 60
 
@@ -20,15 +22,23 @@ static const size_t WINDOW_WIDTH = 512, WINDOW_HEIGHT = 512;
 static const size_t BYTES_PER_PIXEL = 32;
 
 int main(int argc, char** argv) {
+	
     /********************************************************************
      * INITIALISATION DU PROGRAMME
      ********************************************************************/
+    
+   bool front = false;
+	bool back = false;
+	bool left = false;
+	bool right = false;
     
     // Initialisation de la SDL
     SDL_Init(SDL_INIT_VIDEO);
     
     // Creation de la fenêtre et d'un contexte OpenGL
     SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, BYTES_PER_PIXEL, SDL_OPENGL);
+    
+    SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
     
     // Initialisation de GLEW
     GLenum error;
@@ -59,6 +69,10 @@ int main(int argc, char** argv) {
     imac2gl3::MatrixStack ms;
     ms.set(VP);
     
+    imac2gl3::FreeFlyCamera regard;
+    imac2gl3::FreeFlyCamera oeil;
+    oeil.moveFront(-5);
+    
     glEnable(GL_DEPTH_TEST);
     
     //VARIABLE DE MOUVEMENT
@@ -81,12 +95,32 @@ int main(int argc, char** argv) {
         // Dessin
         
         /** PLACEZ VOTRE CODE DE DESSIN ICI **/  
-       ms.push();
-			ms.translate(glm::vec3(0.f, 0.f, -5.f)); //Placement du cube en z
+       	ms.push();
+       	ms.mult(regard.getViewMatrix());
+       	ms.push();
+       	if(front) {
+        		oeil.moveFront(0.1);
+        	}
+        	if(back) {
+        		oeil.moveFront(-0.1);
+        	}
+        	if(left) {
+        		oeil.rotateLeft(0.5);
+        	}
+        	if(right) {
+        		oeil.rotateLeft(-0.5);
+        	}
+      	ms.mult(oeil.getViewMatrix());
+			
+			ms.push();
 			
 			glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, glm::value_ptr(ms.top()));
 			bloc1.draw();
         ms.pop();
+        ms.pop();
+        ms.pop();
+        
+        
         
         // Mise à jour de l'affichage
         SDL_GL_SwapBuffers();
@@ -94,8 +128,43 @@ int main(int argc, char** argv) {
         // Boucle de gestion des évenements
         SDL_Event e;
         while(SDL_PollEvent(&e)) {
+        		if(e.type == SDL_MOUSEMOTION) {
+		      		
+		       		std::cout << (float)e.motion.xrel << std::endl;
+		       		regard.rotateLeft(-(float)e.motion.xrel*0.05);
+		       		regard.rotateUp(-(float)e.motion.yrel*0.05);
+        		}
+		      
+		      if(e.type == SDL_KEYDOWN) {
+		      	if(e.key.keysym.sym == SDLK_z) {
+		      		front = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_s) {
+		      		back = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_d) {
+		      		right = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_q) {
+		      		left = true;
+		      	}
+		      }
+		      if(e.type == SDL_KEYUP) {
+		      	if(e.key.keysym.sym == SDLK_z) {
+		      		front = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_s) {
+		      		back = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_d) {
+		      		right = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_q) {
+		      		left = false;
+		      	}
+		      }
             // Traitement de l'évenement fermeture de fenêtre
-            if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_q) {
+            if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
                 done = true;
                 break;
             }

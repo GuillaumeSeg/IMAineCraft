@@ -1,0 +1,37 @@
+#include "imac2gl3/cameras/TrackBallCamera.hpp"
+
+#include <cmath>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+namespace imac2gl3 {
+
+void TrackBallCamera::moveFront(float distance) {
+		m_fDistance = m_fDistance + distance;
+
+}
+
+void TrackBallCamera::rotateLeft(float degrees) {
+	
+	m_fAngleY = m_fAngleY - degrees;
+	
+}
+
+void TrackBallCamera::rotateUp(float degrees) {
+	
+	m_fAngleX = m_fAngleX - degrees;
+	
+}
+
+glm::mat4 TrackBallCamera::getViewMatrix() const {
+	
+	glm::mat4 V = glm::lookAt(glm::vec3(0.0f,0.0f,-m_fDistance), glm::vec3(cos(m_fAngleX),sin(m_fAngleY),0), glm::vec3(0,1,0));
+	/*glm::mat4 VR = glm::rotate(V, m_fAngleX, glm::vec3(1.0f,0.0f,0.0f));
+	glm::mat4 V2R = glm::rotate(VR, m_fAngleY, glm::vec3(0.0f,1.0f,0.0f));*/
+	
+	return V;
+}
+
+
+}
