@@ -225,4 +225,11 @@ namespace imac2gl3{
     }
     
     // Renvoit l'etat du Cube
+    /*
+    bool Cube::destruction(){
+      if(tempsDestruction=0){
+        ~Cube();
+      }
+    }
+    */
 }

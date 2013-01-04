@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -ansi -pedantic -I include
-LDFLAGS = -lSDL -lGL
+LDFLAGS = -lSDL -lGL -lGLU
 
 SRC_PATH = src
 BIN_PATH = bin
@@ -17,6 +17,10 @@ $(BIN_PATH)/$(EXEC): $(OBJ_FILES) $(SRC_PATH)/glew-1.9/glew.o
 
 $(SRC_PATH)/glew-1.9/glew.o: $(SRC_PATH)/glew-1.9/glew.c
 	$(CC) -c -o $@ $(CFLAGS) $^ 
+
+
+
+
 
 $(SRC_PATH)/%.o: $(SRC_PATH)/%.cpp
 	$(CC) -c -o $@ $(CFLAGS) $^ 
