@@ -1,14 +1,14 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 
-<univers>
-	<cube position="2 2 1"></cube>
-	<cube position="4 2 3"></cube>
-	<cube position="5 1 8"></cube>
-	<cube position="8 1 1"></cube>
-	<cube position="1 2 5"></cube>
-	<cube position="9 1 1"></cube>
-	<cube position="2 2 8"></cube>
-	<cube position="2 2 7"></cube>
-	<cube position="3 5 1"></cube>
+<univers largeurMax="10" longueurMax="10" hauteurMax="10">
+	<cube x="2" y="2" z="1"></cube>
+	<cube x="4" y="2" z="3"></cube>
+	<cube x="5" y="1" z="8"></cube>
+	<cube x="8" y="1" z="1"></cube>
+	<cube x="1" y="2" z="5"></cube>
+	<cube x="9" y="1" z="1"></cube>
+	<cube x="2" y="2" z="8"></cube>
+	<cube x="2" y="2" z="7"></cube>
+	<cube x="3" y="5" z="1"></cube>
 </univers>

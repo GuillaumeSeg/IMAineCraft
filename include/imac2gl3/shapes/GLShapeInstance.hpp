@@ -13,6 +13,7 @@ class GLShapeInstance {
 		GLuint VBO;
 		GLuint VAO;
 		GLsizei vertexCount;
+		int x, y, z;
 		
 		template<typename Shape>
 		GLShapeInstance(const Shape& sphere) {

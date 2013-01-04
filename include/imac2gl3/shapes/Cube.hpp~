@@ -23,6 +23,7 @@ class Cube{
 	//int const tempsDestruction = 1;
 	
 	public:
+		int x, y, z;
 		Cube(GLfloat size);
 		~Cube();
 		const GLvoid* getDataPointer() const; //Renvoie le tableau de données

@@ -1,7 +1,7 @@
 #ifndef _IMAC2GL3_GLShapeInstance_HPP_
 #define _IMAC2GL3_GLShapeInstance_HPP_
 
-#include "imac2gl3/shapes/Sphere.hpp"
+#include "imac2gl3/shapes/Cube.hpp"
 
 #include "common.hpp"
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 #include <cstdlib>
 
 #include <SDL/SDL.h>
@@ -10,6 +11,7 @@
 
 #include "imac2gl3/shader_tools.hpp"
 #include "imac2gl3/shapes/Cube.hpp"
+#include "../include/xml/parser.hpp"
 #include "../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../include/imac2gl3/MatrixStack.hpp"
 #include "../include/imac2gl3/cameras/FreeFlyCamera.hpp"
@@ -47,11 +49,17 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
     
+    //liste de tous les cubes
+    std::list<imac2gl3::GLShapeInstance> allcube;
+    // et son iterator
+    std::list<imac2gl3::GLShapeInstance>::iterator i;
+    
     // Creation des ressources OpenGL
     
     /** PLACEZ VOTRE CODE DE CREATION DES VBOS/VAOS/SHADERS/... ICI **/
     imac2gl3::Cube bloc(1.f);
     imac2gl3::GLShapeInstance bloc1(bloc);
+    recupererXML(&allcube);
   	 
     GLuint program = imac2gl3::loadProgram("shaders/transform.vs.glsl", "shaders/normalcolor.fs.glsl");
     if(!program){
@@ -115,6 +123,20 @@ int main(int argc, char** argv) {
 			ms.push();
 			
 			glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, glm::value_ptr(ms.top()));
+			
+			for(i=allcube.begin(); i!=allcube.end(); i++) {
+				std::cout << i->x << " " << i->y << std::endl;
+    			ms.push();
+    				ms.translate(glm::vec3(i->x,0.0f,0.0f));
+    				ms.translate(glm::vec3(0.0f,i->y,0.0f));
+    				ms.translate(glm::vec3(0.0f,0.0f,i->z));
+    				
+    				glUniformMatrix4fv(MVPLocation,1,GL_FALSE,glm::value_ptr(ms.top()));
+    				
+    				(*i).draw();
+    			ms.pop();
+    		}
+			
 			bloc1.draw();
         ms.pop();
         ms.pop();
@@ -130,7 +152,7 @@ int main(int argc, char** argv) {
         while(SDL_PollEvent(&e)) {
         		if(e.type == SDL_MOUSEMOTION) {
 		      		
-		       		std::cout << (float)e.motion.xrel << std::endl;
+		       		//std::cout << (float)e.motion.xrel << std::endl;
 		       		regard.rotateLeft(-(float)e.motion.xrel*0.05);
 		       		regard.rotateUp(-(float)e.motion.yrel*0.05);
         		}
