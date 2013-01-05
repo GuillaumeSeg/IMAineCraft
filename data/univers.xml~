@@ -2,13 +2,22 @@
 
 
 <univers largeurMax="10" longueurMax="10" hauteurMax="10">
-	<cube x="1" y="1" z="1"></cube>
-	<cube x="2" y="2" z="1"></cube>
-	<cube x="3" y="3" z="1"></cube>
-	<cube x="4" y="4" z="1"></cube>
-	<cube x="5" y="5" z="1"></cube>
-	<cube x="6" y="6" z="1"></cube>
-	<cube x="7" y="7" z="1"></cube>
-	<cube x="8" y="8" z="1"></cube>
-	<cube x="9" y="9" z="1"></cube>
+	<cube x="1" y="1" z="-5"></cube>
+	<cube x="1" y="2" z="-5"></cube>
+	<cube x="1" y="3" z="-5"></cube>
+	<cube x="1" y="4" z="-5"></cube>
+	<cube x="1" y="5" z="-5"></cube>
+	<cube x="1" y="6" z="-5"></cube>
+	<cube x="1" y="7" z="-5"></cube>
+	<cube x="1" y="8" z="-5"></cube>
+	<cube x="1" y="9" z="-5"></cube>
+	<cube x="1" y="1" z="-5"></cube>
+	<cube x="2" y="2" z="-5"></cube>
+	<cube x="3" y="3" z="-5"></cube>
+	<cube x="4" y="4" z="-5"></cube>
+	<cube x="5" y="5" z="-5"></cube>
+	<cube x="6" y="6" z="-5"></cube>
+	<cube x="7" y="7" z="-5"></cube>
+	<cube x="8" y="8" z="-5"></cube>
+	<cube x="9" y="9" z="-5"></cube>
 </univers>

@@ -13,7 +13,7 @@ void main() {
 	
 	vNormal = normale;
 	vTexCoords = coordtext;
-	gl_Position = uMVPMatrix * vec4(position,1.f);
+	gl_Position = uMVPMatrix * vec4(position,1.f);	
 	
 }
 

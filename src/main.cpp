@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
     // Creation des ressources OpenGL
     
     /** PLACEZ VOTRE CODE DE CREATION DES VBOS/VAOS/SHADERS/... ICI **/
-    imac2gl3::Cube bloc(1.f);
-    imac2gl3::GLShapeInstance bloc1(bloc);
+    /*imac2gl3::Cube bloc(1.f);
+    imac2gl3::GLShapeInstance bloc1(bloc);*/
     
     //On charge l'Univers
     Univers univ;
@@ -128,7 +128,7 @@ int main(int argc, char** argv) {
 			glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, glm::value_ptr(ms.top()));
 			
 			for(i=univ.AllCube.begin(); i!=univ.AllCube.end(); i++) {
-				//std::cout << i->x << " " << i->y << std::endl;
+				std::cout << i->x << " " << i->y << " " << i->z <<std::endl;
     			ms.push();
     				ms.translate(glm::vec3(i->x,0.0f,0.0f));
     				ms.translate(glm::vec3(0.0f,i->y,0.0f));
@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
     			ms.pop();
     		}
 			
-			bloc1.draw();
+			//bloc1.draw();
         ms.pop();
         ms.pop();
         ms.pop();
@@ -216,7 +216,7 @@ int main(int argc, char** argv) {
     /** PLACEZ VOTRE CODE DE DESTRUCTION DES VBOS/VAOS/SHADERS/... ICI **/
     
     
-    SDL_Quit();
+   SDL_Quit();
     
-    return EXIT_SUCCESS;
+   return EXIT_SUCCESS;
 }

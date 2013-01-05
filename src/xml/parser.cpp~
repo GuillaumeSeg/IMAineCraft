@@ -16,13 +16,13 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 	}
 	
 	TiXmlHandle hdl(&doc);
-	TiXmlElement *elem = hdl.FirstChildElement().FirstChildElement().Element();
+	TiXmlElement *elem = hdl.FirstChildElement().Element();
 	
-	/*elem->QueryIntAttribute("largeurMax", Lamax);
+	elem->QueryIntAttribute("largeurMax", Lamax);
 	elem->QueryIntAttribute("longueurMax", Lomax);
-	elem->QueryIntAttribute("hauteurMax", Hamax);*/
+	elem->QueryIntAttribute("hauteurMax", Hamax);
 	
-	//elem = hdl.FirstChildElement().Element();
+	elem = hdl.FirstChildElement().FirstChildElement().Element();
 	
 	std::list<imac2gl3::GLShapeInstance>::iterator i;
 	
@@ -42,7 +42,7 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 		
 		
 		for(i=allcube->begin(); i!=allcube->end(); i++) {
-				std::cout << i->x << "  " << i->y << std::endl;
+				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
     		}
 	 
 		elem = elem->NextSiblingElement(); // iteration 
