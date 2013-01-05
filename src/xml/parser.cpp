@@ -5,7 +5,7 @@
 #include "../../include/xml/tinyxml.h"
 #include "../../include/xml/parser.hpp"
 
-void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube) {
+void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *Lamax, int *Lomax) {
 	using namespace std;
 	
 	TiXmlDocument doc("data/univers.xml");
@@ -16,7 +16,13 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube) {
 	}
 	
 	TiXmlHandle hdl(&doc);
-	TiXmlElement *elem = hdl.FirstChildElement().FirstChildElement().Element();
+	TiXmlElement *elem = hdl.FirstChildElement().Element();
+	
+	elem->QueryIntAttribute("largeurMax", Lamax);
+	elem->QueryIntAttribute("longueurMax", Lomax);
+	elem->QueryIntAttribute("hauteurMax", Hamax);
+	
+	elem = hdl.FirstChildElement().FirstChildElement().Element();
 	
 	std::list<imac2gl3::GLShapeInstance>::iterator i;
 	
@@ -29,14 +35,15 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube) {
 	while (elem){
 	
 		imac2gl3::GLShapeInstance cubeinstance(cube);
-		elem->QueryIntAttribute("x", &cubeinstance.x);
-		elem->QueryIntAttribute("y", &cubeinstance.y);
+		elem->QueryIntAttribute("x", &cubeinstance.y);
+		elem->QueryIntAttribute("y", &cubeinstance.x);
 		elem->QueryIntAttribute("z", &cubeinstance.z);
-		allcube->push_back(cubeinstance);
-
-		/*for(i=allcube.begin(); i!=allcube.end(); i++) {
-				std::cout << i->x << " Hola " << i->y << std::endl;
-    		}*/
+		(*allcube).push_back(cubeinstance);
+		
+		
+		for(i=allcube->begin(); i!=allcube->end(); i++) {
+				std::cout << i->x << "  " << i->y << std::endl;
+    		}
 	 
 		elem = elem->NextSiblingElement(); // iteration 
 	}
