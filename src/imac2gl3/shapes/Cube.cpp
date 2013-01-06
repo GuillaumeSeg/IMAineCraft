@@ -13,79 +13,79 @@ namespace imac2gl3{
 		
 		//Face avant
 		m_pDataPointer[0].position.x = -hS; m_pDataPointer[0].position.y = -hS; m_pDataPointer[0].position.z = hS;
-		m_pDataPointer[0].normal.x = 0.f; m_pDataPointer[0].normal.y = 0.f; m_pDataPointer[0].normal.z = 1.f;
+		m_pDataPointer[0].normal.x = 1.f; m_pDataPointer[0].normal.y = 0.f; m_pDataPointer[0].normal.z = 1.f;
 		m_pDataPointer[0].texCoords.x = 0.f; m_pDataPointer[0].texCoords.y = 0.f; 
 		
 		m_pDataPointer[1].position.x = hS; m_pDataPointer[1].position.y = -hS; m_pDataPointer[1].position.z = hS;
-		m_pDataPointer[1].normal.x = 0.f; m_pDataPointer[1].normal.y = 0.f; m_pDataPointer[1].normal.z = 1.f;
+		m_pDataPointer[1].normal.x = 1.f; m_pDataPointer[1].normal.y = 0.f; m_pDataPointer[1].normal.z = 1.f;
 		m_pDataPointer[1].texCoords.x = 1.f; m_pDataPointer[1].texCoords.y = 0.f; 
 		
 		m_pDataPointer[2].position.x = hS; m_pDataPointer[2].position.y = hS; m_pDataPointer[2].position.z = hS;
-		m_pDataPointer[2].normal.x = 0.f; m_pDataPointer[2].normal.y = 0.f; m_pDataPointer[2].normal.z = 1.f;
+		m_pDataPointer[2].normal.x = 1.f; m_pDataPointer[2].normal.y = 0.f; m_pDataPointer[2].normal.z = 1.f;
 		m_pDataPointer[2].texCoords.x = 1.f; m_pDataPointer[2].texCoords.y = 1.f; 
 		
 		m_pDataPointer[3].position.x = hS; m_pDataPointer[3].position.y = hS; m_pDataPointer[3].position.z = hS;
-		m_pDataPointer[3].normal.x = 0.f; m_pDataPointer[3].normal.y = 0.f; m_pDataPointer[3].normal.z = 1.f;
+		m_pDataPointer[3].normal.x = 1.f; m_pDataPointer[3].normal.y = 0.f; m_pDataPointer[3].normal.z = 1.f;
 		m_pDataPointer[3].texCoords.x = 1.f; m_pDataPointer[3].texCoords.y = 1.f; 
 		
 		m_pDataPointer[4].position.x = -hS; m_pDataPointer[4].position.y = hS; m_pDataPointer[4].position.z = hS;
-		m_pDataPointer[4].normal.x = 0.f; m_pDataPointer[4].normal.y = 0.f; m_pDataPointer[4].normal.z = 1.f;
+		m_pDataPointer[4].normal.x = 1.f; m_pDataPointer[4].normal.y = 0.f; m_pDataPointer[4].normal.z = 1.f;
 		m_pDataPointer[4].texCoords.x = 0.f; m_pDataPointer[4].texCoords.y = 1.f; 
 		
 		m_pDataPointer[5].position.x = -hS; m_pDataPointer[5].position.y = -hS; m_pDataPointer[5].position.z = hS;
-		m_pDataPointer[5].normal.x = 0.f; m_pDataPointer[5].normal.y = 0.f; m_pDataPointer[5].normal.z = 1.f;
+		m_pDataPointer[5].normal.x = 1.f; m_pDataPointer[5].normal.y = 0.f; m_pDataPointer[5].normal.z = 1.f;
 		m_pDataPointer[5].texCoords.x = 0.f; m_pDataPointer[5].texCoords.y = 0.f; 
 		
 		
 		//Face arriere
 		m_pDataPointer[6].position.x = -hS; m_pDataPointer[6].position.y = -hS; m_pDataPointer[6].position.z = -hS;
-		m_pDataPointer[6].normal.x = 0.f; m_pDataPointer[6].normal.y = 0.f; m_pDataPointer[6].normal.z = -1.f;
+		m_pDataPointer[6].normal.x = 1.f; m_pDataPointer[6].normal.y = 0.f; m_pDataPointer[6].normal.z = -1.f;
 		m_pDataPointer[6].texCoords.x = 1.f; m_pDataPointer[6].texCoords.y = 0.f; 
 		
 		m_pDataPointer[7].position.x = hS; m_pDataPointer[7].position.y = -hS; m_pDataPointer[7].position.z = -hS;
-		m_pDataPointer[7].normal.x = 0.f; m_pDataPointer[7].normal.y = 0.f; m_pDataPointer[7].normal.z = -1.f;
+		m_pDataPointer[7].normal.x = 1.f; m_pDataPointer[7].normal.y = 0.f; m_pDataPointer[7].normal.z = -1.f;
 		m_pDataPointer[7].texCoords.x = 0.f; m_pDataPointer[7].texCoords.y = 0.f; 
 		
 		m_pDataPointer[8].position.x = hS; m_pDataPointer[8].position.y = hS; m_pDataPointer[8].position.z = -hS;
-		m_pDataPointer[8].normal.x = 0.f; m_pDataPointer[8].normal.y = 0.f; m_pDataPointer[8].normal.z = -1.f;
+		m_pDataPointer[8].normal.x = 1.f; m_pDataPointer[8].normal.y = 0.f; m_pDataPointer[8].normal.z = -1.f;
 		m_pDataPointer[8].texCoords.x = 0.f; m_pDataPointer[8].texCoords.y = 1.f; 
 		
 		m_pDataPointer[9].position.x = hS; m_pDataPointer[9].position.y = hS; m_pDataPointer[9].position.z = -hS;
-		m_pDataPointer[9].normal.x = 0.f; m_pDataPointer[9].normal.y = 0.f; m_pDataPointer[9].normal.z = -1.f;
+		m_pDataPointer[9].normal.x = 1.f; m_pDataPointer[9].normal.y = 0.f; m_pDataPointer[9].normal.z = -1.f;
 		m_pDataPointer[9].texCoords.x = 0.f; m_pDataPointer[9].texCoords.y = 1.f; 
 		
 		m_pDataPointer[10].position.x = -hS; m_pDataPointer[10].position.y = hS; m_pDataPointer[10].position.z = -hS;
-		m_pDataPointer[10].normal.x = 0.f; m_pDataPointer[10].normal.y = 0.f; m_pDataPointer[10].normal.z = -1.f;
+		m_pDataPointer[10].normal.x = 1.f; m_pDataPointer[10].normal.y = 0.f; m_pDataPointer[10].normal.z = -1.f;
 		m_pDataPointer[10].texCoords.x = 1.f; m_pDataPointer[10].texCoords.y = 1.f; 
 		
 		m_pDataPointer[11].position.x = -hS; m_pDataPointer[11].position.y = -hS; m_pDataPointer[11].position.z = -hS;
-		m_pDataPointer[11].normal.x = 0.f; m_pDataPointer[11].normal.y = 0.f; m_pDataPointer[11].normal.z = -1.f;
+		m_pDataPointer[11].normal.x = 1.f; m_pDataPointer[11].normal.y = 0.f; m_pDataPointer[11].normal.z = -1.f;
 		m_pDataPointer[11].texCoords.x = 1.f; m_pDataPointer[11].texCoords.y = 0.f; 
 		
 		
 		//Face gauche
 		m_pDataPointer[12].position.x = -hS; m_pDataPointer[12].position.y = -hS; m_pDataPointer[12].position.z = -hS;
-		m_pDataPointer[12].normal.x = -1.f; m_pDataPointer[12].normal.y = 0.f; m_pDataPointer[12].normal.z = 0.f;
+		m_pDataPointer[12].normal.x = 1.f; m_pDataPointer[12].normal.y = 0.f; m_pDataPointer[12].normal.z = 0.f;
 		m_pDataPointer[12].texCoords.x = 0.f; m_pDataPointer[12].texCoords.y = 0.f; 
 		
 		m_pDataPointer[13].position.x = -hS; m_pDataPointer[13].position.y = -hS; m_pDataPointer[13].position.z = hS;
-		m_pDataPointer[13].normal.x = -1.f; m_pDataPointer[13].normal.y = 0.f; m_pDataPointer[13].normal.z = 0.f;
+		m_pDataPointer[13].normal.x = 1.f; m_pDataPointer[13].normal.y = 0.f; m_pDataPointer[13].normal.z = 0.f;
 		m_pDataPointer[13].texCoords.x = 1.f; m_pDataPointer[13].texCoords.y = 0.f; 
 		
 		m_pDataPointer[14].position.x = -hS; m_pDataPointer[14].position.y = hS; m_pDataPointer[14].position.z = hS;
-		m_pDataPointer[14].normal.x = -1.f; m_pDataPointer[14].normal.y = 0.f; m_pDataPointer[14].normal.z = 0.f;
+		m_pDataPointer[14].normal.x = 1.f; m_pDataPointer[14].normal.y = 0.f; m_pDataPointer[14].normal.z = 0.f;
 		m_pDataPointer[14].texCoords.x = 1.f; m_pDataPointer[14].texCoords.y = 1.f; 
 		
 		m_pDataPointer[15].position.x = -hS; m_pDataPointer[15].position.y = hS; m_pDataPointer[15].position.z = hS;
-		m_pDataPointer[15].normal.x = -1.f; m_pDataPointer[15].normal.y = 0.f; m_pDataPointer[15].normal.z = 0.f;
+		m_pDataPointer[15].normal.x = 1.f; m_pDataPointer[15].normal.y = 0.f; m_pDataPointer[15].normal.z = 0.f;
 		m_pDataPointer[15].texCoords.x = 1.f; m_pDataPointer[15].texCoords.y = 1.f; 
 		
 		m_pDataPointer[16].position.x = -hS; m_pDataPointer[16].position.y = hS; m_pDataPointer[16].position.z = -hS;
-		m_pDataPointer[16].normal.x = -1.f; m_pDataPointer[16].normal.y = 0.f; m_pDataPointer[16].normal.z = 0.f;
+		m_pDataPointer[16].normal.x = 1.f; m_pDataPointer[16].normal.y = 0.f; m_pDataPointer[16].normal.z = 0.f;
 		m_pDataPointer[16].texCoords.x = 0.f; m_pDataPointer[16].texCoords.y = 1.f; 
 		
 		m_pDataPointer[17].position.x = -hS; m_pDataPointer[17].position.y = -hS; m_pDataPointer[17].position.z = -hS;
-		m_pDataPointer[17].normal.x = -1.f; m_pDataPointer[17].normal.y = 0.f; m_pDataPointer[17].normal.z = 0.f;
+		m_pDataPointer[17].normal.x = 1.f; m_pDataPointer[17].normal.y = 0.f; m_pDataPointer[17].normal.z = 0.f;
 		m_pDataPointer[17].texCoords.x = 0.f; m_pDataPointer[17].texCoords.y = 0.f; 
 		
 		
