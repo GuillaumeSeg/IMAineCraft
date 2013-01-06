@@ -8,8 +8,9 @@
 using namespace std;
 
 Univers::Univers() {
-	
+	std::cout << "test4" << std::endl;
 	recupererXML(&AllCube, &hauteurMax, &largeurMax, &longueurMax);
+	std::cout << "test5" << std::endl;
 }
 
 Univers::~Univers() {

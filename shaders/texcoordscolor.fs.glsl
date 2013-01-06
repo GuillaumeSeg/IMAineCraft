@@ -6,5 +6,5 @@ in vec2 vTexCoords;
 out vec3 fFragColor;
 
 void main() {
-    fFragColor = vec3(vTexCoords, 1.f);
+    fFragColor = vec3(vTexCoords, 0.f);
 }

@@ -2,6 +2,7 @@
 #include "imac2gl3/shapes/common.hpp"
 #include "imac2gl3/shapes/GLShapeInstance.hpp"
 #include "imac2gl3/shapes/Cube.hpp"
+#include <iostream>
 
 namespace imac2gl3 {
 

@@ -1,8 +1,8 @@
 #ifndef _IMAC2GL3_GLShapeInstance_HPP_
 #define _IMAC2GL3_GLShapeInstance_HPP_
 
+#include <iostream>
 #include "imac2gl3/shapes/Cube.hpp"
-
 #include "common.hpp"
 
 namespace imac2gl3 {
@@ -13,12 +13,14 @@ class GLShapeInstance {
 		GLuint VBO;
 		GLuint VAO;
 		GLsizei vertexCount;
+		int x, y, z;
 		
 		template<typename Shape>
 		GLShapeInstance(const Shape& sphere) {
 			vertexCount = sphere.getVertexCount();
 	
 	 glGenBuffers(1, &VBO);
+	 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sphere.getByteSize(), sphere.getDataPointer(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER,0); //Débind du VBO
@@ -57,10 +59,11 @@ class GLShapeInstance {
     		);
 			glBindBuffer(GL_ARRAY_BUFFER,0); //Débind du VBO
 		glBindVertexArray(0); //débind du VAO
+		
+		std::cout << "test9" << std::endl;
 		}
 		
 		void draw();
-		
 };
 }
 #endif

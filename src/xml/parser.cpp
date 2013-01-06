@@ -31,7 +31,7 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 		cerr << "le noeud à atteindre n'existe pas" << endl;
 		exit(1);
 	}
-	 
+	
 	while (elem){
 	
 		imac2gl3::GLShapeInstance cubeinstance(cube);
@@ -39,11 +39,11 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 		elem->QueryIntAttribute("y", &cubeinstance.y);
 		elem->QueryIntAttribute("z", &cubeinstance.z);
 		(*allcube).push_back(cubeinstance);
+		 
 		
-		
-		for(i=allcube->begin(); i!=allcube->end(); i++) {
+/*		for(i=allcube->begin(); i!=allcube->end(); i++) {
 				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
-    		}
+    		}*/
 	 
 		elem = elem->NextSiblingElement(); // iteration 
 	}
