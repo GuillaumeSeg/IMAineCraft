@@ -3,17 +3,21 @@
 
 #include <list>
 #include "../imac2gl3/shapes/GLShapeInstance.hpp"
+#include "../imac2gl3/shapes/Cube.hpp"
 
 
 /* Foncteur servant à libérer un pointeur - applicable à n'importe quel type
-struct Delete 
-{ 
-   template <imac2gl3::GLShapeInstance> operator ()(imac2gl3::GLShapeInstance*& p)
-   { 
-      delete p;
-      p = NULL; 
-   } 
+struct Delete
+{
+template <imac2gl3::GLShapeInstance> operator ()(imac2gl3::GLShapeInstance*& p)
+{
+delete p;
+p = NULL;
+}
 };*/
+
+using namespace imac2gl3;
+using namespace std;
 
 class Univers{
 
@@ -21,38 +25,48 @@ class Univers{
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
-		std::list<imac2gl3::GLShapeInstance> AllCube;
-	
-<<<<<<< HEAD
-=======
+		list<GLShapeInstance> AllCube;
+
 		void InitBase();
-		
+
 	public:
-		void PushCube(imac2gl3::GLShapeInstance instance) {
-			AllCube.push_back(instance);
-		}
-		void MergeList(std::list<imac2gl3::GLShapeInstance> instance) {
-			AllCube.merge(instance);
-		}
-		std::list<imac2gl3::GLShapeInstance> getList(){
-			return AllCube;
-		}
-		
+		void PushCube(int x, int y, int z);
+
+		list<GLShapeInstance>* getList();
+
+		bool thereIsACubeHere (int x, int y, int z);
+		bool youAreInsideACube (float x, float y, float z);
+		bool isOutOfUniverse (int x, int y, int z);
+
+		bool isEmpty ();
+
 		void setlargeurmax(int a) {
-			largeurMax = a;
+		largeurMax = a;
 		}
 		void setlongeurmax(int a) {
-			longueurMax = a;
+		longueurMax = a;
 		}
 		void sethauteurmax(int a) {
-			hauteurMax = a;
+		hauteurMax = a;
 		}
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
+
+		int getLargeurMax ()
+		{
+		return largeurMax;
+		}
+
+		int getLongueurMax ()
+		{
+		return longueurMax;
+		}
+
+		int getHauteurMax ()
+		{
+		return hauteurMax;
+		}
+
 		Univers();
 		~Univers();
-		
-		protected:
-		void InitBase();
 
 };
 

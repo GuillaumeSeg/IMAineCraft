@@ -2,18 +2,19 @@
 #define _UNIVERS__HPP
 
 #include <list>
+#include <string>
 #include "../imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../imac2gl3/shapes/Cube.hpp"
 
 
 /* Foncteur servant à libérer un pointeur - applicable à n'importe quel type
-struct Delete 
-{ 
-   template <imac2gl3::GLShapeInstance> operator ()(imac2gl3::GLShapeInstance*& p)
-   { 
-      delete p;
-      p = NULL; 
-   } 
+struct Delete
+{
+template <imac2gl3::GLShapeInstance> operator ()(imac2gl3::GLShapeInstance*& p)
+{
+delete p;
+p = NULL;
+}
 };*/
 
 using namespace imac2gl3;
@@ -26,11 +27,11 @@ class Univers{
 		int hauteurMax;
 		int largeurMax;
 		list<GLShapeInstance> AllCube;
-	
+
 		void InitBase();
-		
+
 	public:
-		void PushCube(int x, int y, int z);
+		void PushCube(int x, int y, int z, std::string type);
 
 		list<GLShapeInstance>* getList();
 
@@ -39,30 +40,30 @@ class Univers{
 		bool isOutOfUniverse (int x, int y, int z);
 
 		bool isEmpty ();
-		
+
 		void setlargeurmax(int a) {
-			largeurMax = a;
+		largeurMax = a;
 		}
 		void setlongeurmax(int a) {
-			longueurMax = a;
+		longueurMax = a;
 		}
 		void sethauteurmax(int a) {
-			hauteurMax = a;
+		hauteurMax = a;
 		}
 
 		int getLargeurMax ()
 		{
-			return largeurMax;
+		return largeurMax;
 		}
 
 		int getLongueurMax ()
 		{
-			return longueurMax;
+		return longueurMax;
 		}
 
 		int getHauteurMax ()
 		{
-			return hauteurMax;
+		return hauteurMax;
 		}
 
 		Univers();

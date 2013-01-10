@@ -1,0 +1,41 @@
+#include "textureManager.hpp"
+#include <string>
+
+//Gérer l'instanciation d'un textureManager Singleton. 
+
+textureManager* textureManager::_instance = 0;
+
+textureManager* textureManager::Instance()
+{
+    if (_instance == 0){
+        _instance = new FabriqueDedale;
+    }
+    return _instance;
+}
+
+void Texture::textureInstance()
+{
+
+}
+
+void textureManager::addTexture(Texture* texture)
+{
+	//ajout texture dans vecteur textures avec push_back
+	this->collecTextures.push_back(texture);
+}
+
+void textureManager::deleteTexture(Texture* texture)
+{
+	//collecTextures.pop_back(texture);
+}
+
+Texture* textureManager::getTexture(string name)
+{
+	for(int i=0; i<collecTextures.size();++i)
+	{
+		if(collecTextures[i].nom == name)
+		{
+			return collecTextures[i];
+		}
+	}
+}

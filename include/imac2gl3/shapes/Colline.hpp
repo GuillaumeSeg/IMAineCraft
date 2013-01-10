@@ -1,6 +1,7 @@
 #ifndef _COLLINE__HPP
 #define _COLLINE__HPP
 
+#include <string>
 #include "../../xml/Univers.hpp"
 
 class Colline {
@@ -8,7 +9,7 @@ class Colline {
 	private:
 	int largeur;
 	int longueur;
-	char type[4];
+	std::string type;
 	int x;
 	int y;
 	int z;
