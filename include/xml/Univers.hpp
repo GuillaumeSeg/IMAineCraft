@@ -35,7 +35,7 @@ class Univers{
 		list<GLShapeInstance>* getList();
 
 		bool thereIsACubeHere (int x, int y, int z);
-		bool youAreInsideACube (int x, int y, int z);
+		bool youAreInsideACube (float x, float y, float z);
 		bool isOutOfUniverse (int x, int y, int z);
 
 		bool isEmpty ();

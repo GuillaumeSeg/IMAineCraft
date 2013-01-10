@@ -53,13 +53,13 @@ bool Univers::thereIsACubeHere (int x, int y, int z)
 	return false;
 }
 
-bool Univers::youAreInsideACube (int x, int y, int z)
+bool Univers::youAreInsideACube (float x, float y, float z)
 {
 	list<GLShapeInstance>::iterator it;
 	for (it = AllCube.begin(); it != AllCube.end(); it++)
 	{
-		cout << x << " ou " << it->x << ", " << endl;
-		if (x >= it->x - 0.9 && x <= it->x + 0.9 && z >= it->z - 0.9 && z <= it->z + 0.9 && y >= it->y - 0.9 && y <= it->y + 0.9)
+		// cout << x << " ou " << it->x << ", " << y << " ou " << it->y << ", " << z << " ou " << it->z << endl;
+		if (x >= it->x - 0.7 && x <= it->x + 0.7 && z >= it->z - 0.7 && z <= it->z + 0.7 && y >= it->y - 0.7 && y <= it->y + 0.7)
 		{
 			return true;
 		}
