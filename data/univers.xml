@@ -1,13 +1,20 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
-
-<univers largeurMax="20" longueurMax="20" hauteurMax="20">
-	<cube x="1" y="-1" z="-5"></cube>
-	<cube x="1" y="-3" z="-5"></cube>
-	<cube x="1" y="-5" z="-5"></cube>
-	<cube x="1" y="-3" z="-5"></cube>
-	<cube x="1" y="-8" z="-5"></cube>
-	<cube x="1" y="-9" z="-5"></cube>
-	<cube x="9" y="-10" z="-5"></cube>
-	<cube x="1" y="-9" z="-5"></cube>
+<univers largeurMax="40" longueurMax="40" hauteurMax="20">
+	<cube x="2" y="1" z="2" type="feuille"></cube>
+	<cube x="5" y="1" z="1" type="sable"></cube>
+	<cube x="1" y="1" z="3" type="sable"></cube>
+	<cube x="7" y="1" z="5" type="feuille"></cube>
+	<cube x="4" y="1" z="8" type="eau"></cube>
+	<cube x="2" y="1" z="5" type="terre"></cube>
+	<cube x="6" y="1" z="4" type="bois"></cube>
+	<colline x="3" y="1" z="7" largeur="4" longueur="4" type="pyr"></colline>
+	<cube x="2" y="1" z="5" type="terre"></cube>
+	<cube x="10" y="1" z="9" type="terre"></cube>
+	<cube x="10" y="1" z="8" type="terre"></cube>
+	<colline x="7" y="1" z="12" largeur="8" longueur="6" type="pyr"></colline>
+	<cube x="10" y="1" z="8" type="terre"></cube>
+	<cube x="10" y="1" z="8" type="terre"></cube>
+	<colline x="21" y="1" z="4" largeur="6" longueur="6" type="cro"></colline>
+	<colline x="15" y="1" z="10" largeur="7" longueur="8" type="pyr"></colline>
 </univers>

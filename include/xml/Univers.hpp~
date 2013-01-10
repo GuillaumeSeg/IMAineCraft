@@ -17,12 +17,37 @@ struct Delete
 
 class Univers{
 
-	public:
+	private:
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
 		std::list<imac2gl3::GLShapeInstance> AllCube;
 	
+<<<<<<< HEAD
+=======
+		void InitBase();
+		
+	public:
+		void PushCube(imac2gl3::GLShapeInstance instance) {
+			AllCube.push_back(instance);
+		}
+		void MergeList(std::list<imac2gl3::GLShapeInstance> instance) {
+			AllCube.merge(instance);
+		}
+		std::list<imac2gl3::GLShapeInstance> getList(){
+			return AllCube;
+		}
+		
+		void setlargeurmax(int a) {
+			largeurMax = a;
+		}
+		void setlongeurmax(int a) {
+			longueurMax = a;
+		}
+		void sethauteurmax(int a) {
+			hauteurMax = a;
+		}
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 		Univers();
 		~Univers();
 		

@@ -25,7 +25,7 @@ private :
 	void computeDirectionVectors();
 
 public:
-	FreeFlyCamera(Univers univers);
+	FreeFlyCamera();
 
 	vec3 getFrontVector ();
 	vec3 getPosition ();

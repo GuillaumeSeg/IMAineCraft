@@ -8,6 +8,7 @@
 
 using namespace glm;
 using namespace std;
+using namespace imac2gl3;
 
 static const Uint32 MIN_LOOP_TIME = 1000/FRAME_RATE;
 static const size_t WINDOW_WIDTH = 512, WINDOW_HEIGHT = 512;
@@ -35,15 +36,15 @@ void gameEngine::initSDL(){
     SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 }
 
-void gameEngine::initCamera(imac2gl3::FreeFlyCamera& camera, int position){
+void gameEngine::initCamera(FreeFlyCamera& camera, int position){
     camera.moveFront(float (position), *univers);
 }
 
 void gameEngine::run(){
 	
 	//Création camera + initialisation
-	imac2gl3::FreeFlyCamera regard(*univers);
-    	imac2gl3::FreeFlyCamera oeil(*univers);
+	FreeFlyCamera regard;
+    	FreeFlyCamera oeil;
 	initCamera(oeil,-5);
 
 	//Initialisation mouvement camera
@@ -65,7 +66,7 @@ void gameEngine::run(){
  	  	start = SDL_GetTicks();
  	  	
  	  	//MATRIX 
-		GLuint program = imac2gl3::loadProgram("shaders/transform.vs.glsl", "shaders/normalcolor.fs.glsl");
+		GLuint program = loadProgram("shaders/transform.vs.glsl", "shaders/normalcolor.fs.glsl");
 		if(!program){
 			exit(1);
 		}

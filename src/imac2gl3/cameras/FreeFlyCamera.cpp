@@ -7,7 +7,9 @@
 
 #include "../../../include/xml/Univers.hpp"
 
-#define INITIAL_Y -3.8
+#define INITIAL_X 0.0
+#define INITIAL_Y 1.0
+#define INITIAL_Z 0.0
 
 using namespace glm;
 
@@ -20,9 +22,8 @@ namespace imac2gl3 {
 		m_UpVector = cross(m_FrontVector, m_LeftVector);
 	}
 
-	FreeFlyCamera::FreeFlyCamera(Univers univers) {
-		m_Position = vec3(0., INITIAL_Y, 0.);
-		//std::cout << - (univers.getHauteurMax()/2 - 1.) << std::endl;
+	FreeFlyCamera::FreeFlyCamera() {
+		m_Position = vec3(INITIAL_X, INITIAL_Y, INITIAL_Z);
 		m_fPhi = PI;
 		m_fTheta = 0;
 		computeDirectionVectors();
@@ -98,15 +99,7 @@ namespace imac2gl3 {
 	bool FreeFlyCamera::collisionCube (float t, Univers univers)
 	{
 		vec3 testPosition = m_Position + m_FrontVector*t;
-		std::list<GLShapeInstance>::iterator it;
-		for (it = univers.AllCube.begin(); it != univers.AllCube.end(); it++)
-		{
-			if (testPosition.x >= it->x - 0.7 && testPosition.x <= it->x + 0.7 && testPosition.z >= it->z - 0.7 && testPosition.z <= it->z + 0.7 && testPosition.y - INITIAL_Y - univers.getHauteurMax()/2 + 1 >= it->y - 0.7 && testPosition.y - INITIAL_Y - univers.getHauteurMax()/2 + 1 <= it->y + 0.7)
-			{
-				return true;
-			}
-		}
-		return false;
+		return univers.youAreInsideACube (testPosition.x, testPosition.y, testPosition.z);
 	}
 
 	void FreeFlyCamera::rotateLeft(float degrees) {

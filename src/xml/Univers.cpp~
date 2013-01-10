@@ -9,7 +9,11 @@
 using namespace std;
 
 Univers::Univers() {
+<<<<<<< HEAD
 	recupererXML(&AllCube, &hauteurMax, &largeurMax, &longueurMax);
+=======
+	recupererXML(this);
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 	InitBase();
 }
 
@@ -23,7 +27,11 @@ void Univers::InitBase() {
 	for(int i = -largeurMax/2; i < largeurMax/2; ++i){
 		for(int j = -longueurMax/2; j < longueurMax/2; ++j) {
 		imac2gl3::Cube cube(1.f);
+<<<<<<< HEAD
 	
+=======
+		
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 		imac2gl3::GLShapeInstance cubeinstance(cube);
 		
 		cubeinstance.x = i;

@@ -2,22 +2,40 @@
 #define _COLLINE__HPP
 
 #include "../../xml/Univers.hpp"
+<<<<<<< HEAD
 #include <string>
+=======
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 
 class Colline {
 
 	private:
 	int largeur;
 	int longueur;
+<<<<<<< HEAD
 	string type;
+=======
+	char type[4];
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 	int x;
 	int y;
 	int z;
 	std::list<imac2gl3::GLShapeInstance> cubes;
 	
 	public:
+<<<<<<< HEAD
 	Colline(Univers &univ);
 	~Colline();
+=======
+	Colline(int largeur, int longueur, const char* type, int x, int y, int z, Univers &univ);
+	~Colline(){};
+	void initCubesColline (Univers &univ);
+	void initLayer (int numLayer, int largeurLayer, int longeurLayer);
+	
+	std::list<imac2gl3::GLShapeInstance> getListCube() {
+		return cubes;
+	}
+>>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 
 };
 

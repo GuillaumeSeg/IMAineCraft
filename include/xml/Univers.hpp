@@ -3,6 +3,7 @@
 
 #include <list>
 #include "../imac2gl3/shapes/GLShapeInstance.hpp"
+#include "../imac2gl3/shapes/Cube.hpp"
 
 
 /* Foncteur servant à libérer un pointeur - applicable à n'importe quel type
@@ -16,23 +17,28 @@ struct Delete
 };*/
 
 using namespace imac2gl3;
+using namespace std;
 
 class Univers{
 
-	public:
+	private:
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
-		std::list<GLShapeInstance> AllCube;
+		list<GLShapeInstance> AllCube;
 	
 		void InitBase();
 		
-		void PushCube(GLShapeInstance instance) {
-			AllCube.push_back(instance);
-		}
-		void SpliceList(std::list<GLShapeInstance> instance) {
-			AllCube.splice(AllCube.end(), instance);
-		}
+	public:
+		void PushCube(int x, int y, int z);
+
+		list<GLShapeInstance>* getList();
+
+		bool thereIsACubeHere (int x, int y, int z);
+		bool youAreInsideACube (int x, int y, int z);
+		bool isOutOfUniverse (int x, int y, int z);
+
+		bool isEmpty ();
 		
 		void setlargeurmax(int a) {
 			largeurMax = a;
