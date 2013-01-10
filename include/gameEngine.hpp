@@ -29,7 +29,6 @@ class gameEngine
 		/*void affectUnivers();*/
 		void run();
 		void initSDL();
-		void initGlew();
 		void initCamera(imac2gl3::FreeFlyCamera& camera, int position);
 };
 

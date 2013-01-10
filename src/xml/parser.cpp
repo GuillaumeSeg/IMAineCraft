@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <list>
-#include <string>
 #include "../../include/imac2gl3/shapes/Cube.hpp"
 #include "../../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../../include/xml/tinyxml.h"
@@ -68,9 +67,7 @@ void recupererXML(Univers *univ) {
 			elem->QueryIntAttribute ("x", &tmpx);
 			elem->QueryIntAttribute ("y", &tmpy);
 			elem->QueryIntAttribute ("z", &tmpz);
-			std::string type;
-			type = elem->Attribute("type");
-			univ->PushCube (tmpx, tmpy, tmpz, type);
+			univ->PushCube (tmpx, tmpy, tmpz);
 	
 		}
 	

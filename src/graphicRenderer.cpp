@@ -1,6 +1,4 @@
 #include "../include/graphicRenderer.hpp"
-#include "../include/texture/textureManager.hpp"
-#include <SDL/SDL_image.h>
 
 #define FRAME_RATE 60
 
@@ -15,7 +13,7 @@ graphicRenderer::graphicRenderer()
 	
 }
 
-void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, imac2gl3::FreeFlyCamera& cameraOrientation, GLint matrix){
+void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, imac2gl3::FreeFlyCamera& cameraOrientation, Univers* universe, GLint matrix){
 
 	glm::mat4 P = glm::perspective(70.f, WINDOW_WIDTH / (float) WINDOW_HEIGHT, 0.1f, 1000.f);
 	glm::mat4 V = glm::lookAt(glm::vec3(0.f,0.f,0.f), glm::vec3(0.f, 0.f, -1.f), glm::vec3(0.f,1.f,0.f));
@@ -38,17 +36,20 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
 	
 	// i : iterator de la liste de cubes
     std::list<imac2gl3::GLShapeInstance>::iterator i;
-	for(i=universe->AllCube.begin(); i!=universe->AllCube.end(); ++i) {
-		std::cout << i->x << " " << i->y << std::endl;
-		ms.push();
-		ms.translate(glm::vec3(i->x,0.0f,0.0f));
-		ms.translate(glm::vec3(0.0f,i->y,0.0f));
-		ms.translate(glm::vec3(0.0f,0.0f,i->z));
+
+    if (!universe->isEmpty())
+    {
+		for(i=universe->getList()->begin(); i!=universe->getList()->end(); i++) {
+			ms.push();
+			ms.translate(glm::vec3(i->x,0.0f,0.0f));
+			ms.translate(glm::vec3(0.0f,i->y,0.0f));
+			ms.translate(glm::vec3(0.0f,0.0f,i->z));
 		
-		glUniformMatrix4fv(matrix,1,GL_FALSE,glm::value_ptr(ms.top()));
+			glUniformMatrix4fv(matrix,1,GL_FALSE,glm::value_ptr(ms.top()));
 		
-		(*i).draw();
-		ms.pop();
+			(*i).draw();
+			ms.pop();
+		}
 	}
 		
     ms.pop();
@@ -56,28 +57,6 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
     ms.pop();
 }
 
-void graphicRenderer::loadTextureManager(){
+void graphicRenderer::drawShapes(){
 
-	textureManager *texManager = textureManager::Instance();
-	
-	//instanciation des textures
-	Texture* pierre = new Texture("stone","../data/graphic/images/pierre.gif");
-	texManager->addTexture(pierre);
-	Texture* eau = new Texture("water","../data/graphic/images/eau.gif");
-	texManager->addTexture(eau);
-	Texture* feuille = new Texture("leaves","../data/graphic/images/feuille.gif");
-	texManager->addTexture(eau);
-	Texture* terre = new Texture("ground","../data/graphic/images/terre_b.gif");
-	texManager->addTexture(terre);
-	Texture* sable = new Texture("sand","../data/graphic/images/sable.gif");
-	texManager->addTexture(sable);
-	Texture* bois = new Texture("wood","../data/graphic/images/arbre_c.gif");
-	texManager->addTexture(bois);
-	
-	
-}
-
-void graphicRenderer::setTextures()
-{
-	
 }

@@ -2,7 +2,6 @@
 #define _IMAC2GL3_CUBE_
 
 #include <GL/glew.h>
-#include <string>
 #include "common.hpp"
 
 namespace imac2gl3{
@@ -24,8 +23,7 @@ namespace imac2gl3{
 	  
 	  bool destructible;
 	  static int const tempsDestruction = 5;
-	  static const std::string type;
-	  	
+	
 	  public:
 		  Cube(GLfloat size);
 		  ~Cube();

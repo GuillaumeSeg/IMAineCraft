@@ -1,19 +1,10 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
-#include <string>
 
 #include "../../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../../include/xml/Univers.hpp"
 #include "../../include/xml/parser.hpp"
-
-#include "../../include/imac2gl3/shapes/Wood.hpp"
-#include "../../include/imac2gl3/shapes/Sand.hpp"
-#include "../../include/imac2gl3/shapes/Water.hpp"
-#include "../../include/imac2gl3/shapes/Stone.hpp"
-#include "../../include/imac2gl3/shapes/Torche.hpp"
-#include "../../include/imac2gl3/shapes/Terre.hpp"
-#include "../../include/imac2gl3/shapes/Leaf.hpp"
 
 using namespace std;
 using namespace imac2gl3;
@@ -28,48 +19,25 @@ Univers::~Univers() {
 	//for_each(AllCube.begin(), AllCube.end(), Delete());
 }
 
-void Univers::PushCube(int x, int y, int z, std::string type)
+void Univers::PushCube(int x, int y, int z)
 {
-	cout << AllCube.size() << endl;
 	// S'il y a déjà un cube à ces coordonnées, on ne crée pas de nouveau cube.
 	if (thereIsACubeHere (x, y, z) || isOutOfUniverse (x, y, z))
 		return;
 
 	Cube cube(1.f);
-	cout << type << endl;
-	/*switch(type)
-	{
-		case "feuille" :
-			Leaf cube(1.f);
-			break;
-		case "pierre" :
-			Stone cube(1.f);
-			break;
-		case "eau" :
-			Water cube(1.f);
-			break;
-		case "sable" :
-			Sand cube(1.f);
-			break;
-		case "terre" :
-			Terre cube(1.f);
-			break;
-		case "torche" :
-			Torche cube(1.f);
-			break;
-		case "bois" :
-			Wood cube(1.f);
-			break;
-	}*/
 
-	GLShapeInstance cubeinstance(cube);
+	GLShapeInstance cubeinstance (cube);
 
 	cubeinstance.x = x;
 	cubeinstance.y = y;
 	cubeinstance.z = z;
-	cubeinstance.type = type;
 
 	AllCube.push_back(cubeinstance);
+}
+
+list<GLShapeInstance>* Univers::getList(){
+	return &AllCube;
 }
 
 bool Univers::thereIsACubeHere (int x, int y, int z)
@@ -85,13 +53,32 @@ bool Univers::thereIsACubeHere (int x, int y, int z)
 	return false;
 }
 
+bool Univers::youAreInsideACube (float x, float y, float z)
+{
+	list<GLShapeInstance>::iterator it;
+	for (it = AllCube.begin(); it != AllCube.end(); it++)
+	{
+		// cout << x << " ou " << it->x << ", " << y << " ou " << it->y << ", " << z << " ou " << it->z << endl;
+		if (x >= it->x - 0.7 && x <= it->x + 0.7 && z >= it->z - 0.7 && z <= it->z + 0.7 && y >= it->y - 0.7 && y <= it->y + 0.7)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 bool Univers::isOutOfUniverse (int x, int y, int z)
 {
-	if (x > largeurMax/2 - 1 || x < -largeurMax/2 || y > hauteurMax/2 - 1 || y < -hauteurMax/2 || z > longueurMax/2 - 1 || z < -longueurMax/2)
+	if (x > largeurMax/2 - 1 || x < -largeurMax/2 || y < 0. || y > hauteurMax - 1 || z > longueurMax/2 - 1 || z < -longueurMax/2)
 	{
 		return true;
 	}
 	return false;
+}
+
+bool Univers::isEmpty ()
+{
+	return AllCube.empty();
 }
 
 void Univers::InitBase() {
@@ -103,7 +90,7 @@ void Univers::InitBase() {
 			GLShapeInstance cubeinstance(cube);
 		
 			cubeinstance.x = i;
-			cubeinstance.y = -hauteurMax/2;
+			cubeinstance.y = 0;
 			cubeinstance.z = j;
 		
 			AllCube.push_back(cubeinstance);

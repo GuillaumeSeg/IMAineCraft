@@ -6,6 +6,10 @@
 
 #define FRAME_RATE 60
 
+using namespace glm;
+using namespace std;
+using namespace imac2gl3;
+
 static const Uint32 MIN_LOOP_TIME = 1000/FRAME_RATE;
 static const size_t WINDOW_WIDTH = 512, WINDOW_HEIGHT = 512;
 static const size_t BYTES_PER_PIXEL = 32;
@@ -15,11 +19,13 @@ gameEngine::gameEngine(graphicRenderer* renderer){
 	gRenderer = renderer;
 	
 	initSDL();
-	initGlew();
+	// Initialisation de GLEW
+    GLenum error;
+    if(GLEW_OK != (error = glewInit())) {
+        std::cerr << "Impossible d'initialiser GLEW: " << glewGetErrorString(error) << std::endl;
+        exit(1);
+    }
 	univers = new Univers;
-	
-	gRenderer->universe = univers;
-	gRenderer->loadTextureManager();
 }
 
 void gameEngine::initSDL(){
@@ -30,24 +36,15 @@ void gameEngine::initSDL(){
     SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 }
 
-void gameEngine::initGlew(){
-	// Initialisation de GLEW
-    GLenum error;
-    if(GLEW_OK != (error = glewInit())) {
-        std::cerr << "Impossible d'initialiser GLEW: " << glewGetErrorString(error) << std::endl;
-        exit(1);
-    }
-}
-
-void gameEngine::initCamera(imac2gl3::FreeFlyCamera& camera, int position){
-    camera.moveFront(position);
+void gameEngine::initCamera(FreeFlyCamera& camera, int position){
+    camera.moveFront(float (position), *univers);
 }
 
 void gameEngine::run(){
 	
 	//Création camera + initialisation
-	imac2gl3::FreeFlyCamera regard;
-    imac2gl3::FreeFlyCamera oeil;
+	FreeFlyCamera regard;
+    	FreeFlyCamera oeil;
 	initCamera(oeil,-5);
 
 	//Initialisation mouvement camera
@@ -62,14 +59,14 @@ void gameEngine::run(){
 	// Boucle principale
     bool done = false;
     while(!done) {
-		// Initialisation compteur
+		// Initilisation compteur
 		Uint32 start = 0;
 		Uint32 end = 0;
 		Uint32 ellapsedTime = 0;
  	  	start = SDL_GetTicks();
  	  	
  	  	//MATRIX 
-		GLuint program = imac2gl3::loadProgram("shaders/transform.vs.glsl", "shaders/normalcolor.fs.glsl");
+		GLuint program = loadProgram("shaders/transform.vs.glsl", "shaders/normalcolor.fs.glsl");
 		if(!program){
 			exit(1);
 		}
@@ -80,7 +77,7 @@ void gameEngine::run(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//rendu de l'univers
-		gRenderer->renderUniverse(oeil,regard,MVPLocation);
+		gRenderer->renderUniverse(oeil,regard,univers,MVPLocation);
 		
         
         
@@ -91,10 +88,10 @@ void gameEngine::run(){
         /** PLACEZ VOTRE CODE DE DESSIN ICI **/  
        	
        	if(front) {
-        		oeil.moveFront(0.1);
+        		oeil.moveFront(0.1, *univers);
         	}
         	if(back) {
-        		oeil.moveFront(-0.1);
+        		oeil.moveFront(-0.1, *univers);
         	}
         	if(left) {
         		oeil.rotateLeft(0.5);
@@ -111,51 +108,51 @@ void gameEngine::run(){
         // Boucle de gestion des évenements
         SDL_Event e;
         while(SDL_PollEvent(&e)) {
-			if(e.type == SDL_MOUSEMOTION) {
-		  		
-		   		//std::cout << (float)e.motion.xrel << std::endl;
-		   		regard.rotateLeft(-(float)e.motion.xrel*0.05);
-		   		regard.rotateUp(-(float)e.motion.yrel*0.05);
-			}
+        		if(e.type == SDL_MOUSEMOTION) {
+		      		
+		       		//std::cout << (float)e.motion.xrel << std::endl;
+		       		regard.rotateLeft(-(float)e.motion.xrel*0.05);
+		       		regard.rotateUp(-(float)e.motion.yrel*0.05);
+        		}
 		      
-	      if(e.type == SDL_KEYDOWN) {
-	      	if(e.key.keysym.sym == SDLK_z) {
-	      		front = true;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_s) {
-	      		back = true;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_d) {
-	      		right = true;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_q) {
-	      		left = true;
-	      	}
-	      }
-	      if(e.type == SDL_KEYUP) {
-	      	if(e.key.keysym.sym == SDLK_z) {
-	      		front = false;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_s) {
-	      		back = false;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_d) {
-	      		right = false;
-	      	}
-	      	if(e.key.keysym.sym == SDLK_q) {
-	      		left = false;
-	      	}
-	      }
-		    // Traitement de l'évenement fermeture de fenêtre
-		    if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
-		        done = true;
-		        break;
-		    }
-		    
-		    // Traitement des autres évenements:
-		    
-		    /** PLACEZ VOTRE CODE DE TRAITEMENT DES EVENTS ICI **/
-		}
+		      if(e.type == SDL_KEYDOWN) {
+		      	if(e.key.keysym.sym == SDLK_z) {
+				front = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_s) {
+		      		back = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_d) {
+		      		right = true;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_q) {
+		      		left = true;
+		      	}
+		      }
+		      if(e.type == SDL_KEYUP) {
+		      	if(e.key.keysym.sym == SDLK_z) {
+		      		front = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_s) {
+		      		back = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_d) {
+		      		right = false;
+		      	}
+		      	if(e.key.keysym.sym == SDLK_q) {
+		      		left = false;
+		      	}
+		      }
+            // Traitement de l'évenement fermeture de fenêtre
+            if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
+                done = true;
+                break;
+            }
+            
+            // Traitement des autres évenements:
+            
+            /** PLACEZ VOTRE CODE DE TRAITEMENT DES EVENTS ICI **/
+        }
         
         //idle
         alpha_earth +=0.5;

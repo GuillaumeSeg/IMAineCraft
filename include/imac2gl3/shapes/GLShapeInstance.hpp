@@ -2,7 +2,6 @@
 #define _IMAC2GL3_GLShapeInstance_HPP_
 
 #include <iostream>
-#include <string>
 #include "imac2gl3/shapes/Cube.hpp"
 #include "common.hpp"
 
@@ -15,7 +14,6 @@ class GLShapeInstance {
 		GLuint VAO;
 		GLsizei vertexCount;
 		int x, y, z;
-		std::string type;
 		
 		template<typename Shape>
 		GLShapeInstance(const Shape& sphere) {

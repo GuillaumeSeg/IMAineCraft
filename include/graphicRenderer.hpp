@@ -7,16 +7,12 @@
 
 class graphicRenderer
 {	
-	friend class gameEngine;
-	protected :
-		Univers* universe;
-
 	public : 
 		graphicRenderer();
 		~graphicRenderer(){}
-		void renderUniverse(imac2gl3::FreeFlyCamera& camera1, imac2gl3::FreeFlyCamera& camera2, GLint matrix);
-		void loadTextureManager(); 
-		void setTextures(); //appliquer une texture à un cube suivant le type
+		void renderUniverse(imac2gl3::FreeFlyCamera& camera1, imac2gl3::FreeFlyCamera& camera2, Univers* universe, GLint matrix);
+		void drawShapes(); //prendre formes à dessiner en parametres
+		
 };
 
 #endif
