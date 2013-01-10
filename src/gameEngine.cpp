@@ -6,6 +6,9 @@
 
 #define FRAME_RATE 60
 
+using namespace glm;
+using namespace std;
+
 static const Uint32 MIN_LOOP_TIME = 1000/FRAME_RATE;
 static const size_t WINDOW_WIDTH = 512, WINDOW_HEIGHT = 512;
 static const size_t BYTES_PER_PIXEL = 32;
@@ -33,14 +36,14 @@ void gameEngine::initSDL(){
 }
 
 void gameEngine::initCamera(imac2gl3::FreeFlyCamera& camera, int position){
-    camera.moveFront(position);
+    camera.moveFront(float (position), *univers);
 }
 
 void gameEngine::run(){
 	
 	//Création camera + initialisation
-	imac2gl3::FreeFlyCamera regard;
-    imac2gl3::FreeFlyCamera oeil;
+	imac2gl3::FreeFlyCamera regard(*univers);
+    	imac2gl3::FreeFlyCamera oeil(*univers);
 	initCamera(oeil,-5);
 
 	//Initialisation mouvement camera
@@ -84,10 +87,10 @@ void gameEngine::run(){
         /** PLACEZ VOTRE CODE DE DESSIN ICI **/  
        	
        	if(front) {
-        		oeil.moveFront(0.1);
+        		oeil.moveFront(0.1, *univers);
         	}
         	if(back) {
-        		oeil.moveFront(-0.1);
+        		oeil.moveFront(-0.1, *univers);
         	}
         	if(left) {
         		oeil.rotateLeft(0.5);
@@ -113,7 +116,7 @@ void gameEngine::run(){
 		      
 		      if(e.type == SDL_KEYDOWN) {
 		      	if(e.key.keysym.sym == SDLK_z) {
-		      		front = true;
+				front = true;
 		      	}
 		      	if(e.key.keysym.sym == SDLK_s) {
 		      		back = true;

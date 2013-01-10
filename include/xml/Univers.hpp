@@ -15,15 +15,50 @@ struct Delete
    } 
 };*/
 
+using namespace imac2gl3;
+
 class Univers{
 
 	public:
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
-		std::list<imac2gl3::GLShapeInstance> AllCube;
+		std::list<GLShapeInstance> AllCube;
 	
-	public:
+		void InitBase();
+		
+		void PushCube(GLShapeInstance instance) {
+			AllCube.push_back(instance);
+		}
+		void SpliceList(std::list<GLShapeInstance> instance) {
+			AllCube.splice(AllCube.end(), instance);
+		}
+		
+		void setlargeurmax(int a) {
+			largeurMax = a;
+		}
+		void setlongeurmax(int a) {
+			longueurMax = a;
+		}
+		void sethauteurmax(int a) {
+			hauteurMax = a;
+		}
+
+		int getLargeurMax ()
+		{
+			return largeurMax;
+		}
+
+		int getLongueurMax ()
+		{
+			return longueurMax;
+		}
+
+		int getHauteurMax ()
+		{
+			return hauteurMax;
+		}
+
 		Univers();
 		~Univers();
 

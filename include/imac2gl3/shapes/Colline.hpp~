@@ -1,0 +1,25 @@
+#ifndef _COLLINE__HPP
+#define _COLLINE__HPP
+
+#include "../../xml/Univers.hpp"
+#include <string>
+
+class Colline {
+
+	private:
+	int largeur;
+	int longueur;
+	string type;
+	int x;
+	int y;
+	int z;
+	std::list<imac2gl3::GLShapeInstance> cubes;
+	
+	public:
+	Colline(Univers &univ);
+	~Colline();
+
+};
+
+#endif
+

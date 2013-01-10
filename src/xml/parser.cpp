@@ -33,7 +33,9 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 	}
 	
 	while (elem){
-	
+		
+		
+		
 		imac2gl3::GLShapeInstance cubeinstance(cube);
 		elem->QueryIntAttribute("x", &cubeinstance.x);
 		elem->QueryIntAttribute("y", &cubeinstance.y);

@@ -21,11 +21,13 @@ class Univers{
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
-		std::list<imac2gl3::GLShapeInstance> *AllCube;
+		std::list<imac2gl3::GLShapeInstance> AllCube;
 	
-	public:
 		Univers();
 		~Univers();
+		
+		protected:
+		void InitBase();
 
 };
 

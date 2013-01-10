@@ -37,7 +37,6 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
 	// i : iterator de la liste de cubes
     std::list<imac2gl3::GLShapeInstance>::iterator i;
 	for(i=universe->AllCube.begin(); i!=universe->AllCube.end(); ++i) {
-		std::cout << i->x << " " << i->y << std::endl;
 		ms.push();
 		ms.translate(glm::vec3(i->x,0.0f,0.0f));
 		ms.translate(glm::vec3(0.0f,i->y,0.0f));

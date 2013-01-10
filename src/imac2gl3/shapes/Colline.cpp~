@@ -1,0 +1,75 @@
+#include "../../include/imac2gl3/shapes/Colline.hpp"
+#include "../../include/xml/Univers.hpp"
+#include <string>
+
+Colline::Colline(int largeur, int longueur, string type, int x, int y, int z) {
+
+
+	
+}
+
+void initCubesColline (Univers &univ)
+{
+	for(int i = -largeur/2; i < largeur/2; ++i) {
+		for(int j = -longueur/2; j < longueur/2; ++j) {
+		imac2gl3::Cube cube(1.f);
+		
+		imac2gl3::GLShapeInstance cubeinstance(cube);
+		
+		cubeinstance.x = i;
+		cubeinstance.y = -hauteurMax/2;
+		cubeinstance.z = j;
+		
+		AllCube.push_back(cubeinstance);
+		}
+	}
+}
+
+// La colline est faite de plusieurs layers de cubes
+void initLayer (int numLayer, int largeurLayer, int longeurLayer)
+{
+	if (type.compare("pyr") || largeurLayer <= 2)
+	{
+		for(int i = -largeurLayer/2; i < largeurLayer/2; ++i) {
+			for(int j = -longueurLayer/2; j < longueurLayer/2; ++j) {
+				imac2gl3::Cube cube(1.f);
+		
+				imac2gl3::GLShapeInstance cubeinstance(cube);
+			
+					cubeinstance.x = i + this->x;
+					cubeinstance.y = numLayer + this->y;
+					cubeinstance.z = j + this->z;
+			
+				this->cubes.push_back (cubeinstance);
+			}
+		}
+	}
+	else
+	{
+		for(int i = -largeurLayer/2 + 1; i < largeurLayer/2 - 1; ++i) {
+			for(int j = -longueurLayer/2; j < longueurLayer/2; ++j) {
+				imac2gl3::Cube cube(1.f);
+		
+				imac2gl3::GLShapeInstance cubeinstance(cube);
+			
+					cubeinstance.x = i + this->x;
+					cubeinstance.y = numLayer + this->y;
+					cubeinstance.z = j + this->z;
+			
+				this->cubes.push_back (cubeinstance);
+			}
+		}
+		for(int j = -longueurLayer/2 + 1; j < longueurLayer/2 - 1; ++j) {
+			for (int i = -largeurLayer/2; i < largeurLayer/2; i = i + largeurLayer - 1)
+			imac2gl3::Cube cube(1.f);
+	
+			imac2gl3::GLShapeInstance cubeinstance(cube);
+		
+				cubeinstance.x = i + this->x;
+				cubeinstance.y = numLayer + this->y;
+				cubeinstance.z = j + this->z;
+		
+			this->cubes.push_back (cubeinstance);
+		}
+	}
+}
