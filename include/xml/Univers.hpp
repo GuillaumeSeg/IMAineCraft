@@ -2,6 +2,7 @@
 #define _UNIVERS__HPP
 
 #include <list>
+#include <string>
 #include "../imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../imac2gl3/shapes/Cube.hpp"
 
@@ -17,7 +18,6 @@ struct Delete
 };*/
 
 using namespace imac2gl3;
-using namespace std;
 
 class Univers{
 
@@ -25,20 +25,21 @@ class Univers{
 		int longueurMax;
 		int hauteurMax;
 		int largeurMax;
-		list<GLShapeInstance> AllCube;
+		std::list<GLShapeInstance> AllCube;		
 	
 		void InitBase();
 		
 	public:
-		void PushCube(int x, int y, int z);
-
-		list<GLShapeInstance>* getList();
+		void PushCube(int x, int y, int z, std::string type);
+		/*void MergeList(std::list<imac2gl3::GLShapeInstance> instance) {
+			AllCube.merge(instance);
+		}*/
+		std::list<imac2gl3::GLShapeInstance>* getList(){
+			return &AllCube;
+		}
 
 		bool thereIsACubeHere (int x, int y, int z);
-		bool youAreInsideACube (float x, float y, float z);
 		bool isOutOfUniverse (int x, int y, int z);
-
-		bool isEmpty ();
 		
 		void setlargeurmax(int a) {
 			largeurMax = a;
@@ -49,22 +50,6 @@ class Univers{
 		void sethauteurmax(int a) {
 			hauteurMax = a;
 		}
-
-		int getLargeurMax ()
-		{
-			return largeurMax;
-		}
-
-		int getLongueurMax ()
-		{
-			return longueurMax;
-		}
-
-		int getHauteurMax ()
-		{
-			return hauteurMax;
-		}
-
 		Univers();
 		~Univers();
 
