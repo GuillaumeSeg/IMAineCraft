@@ -1,11 +1,14 @@
 #include <iostream>
+#include <cstdlib>
 #include <list>
 #include "../../include/imac2gl3/shapes/Cube.hpp"
 #include "../../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../../include/xml/tinyxml.h"
 #include "../../include/xml/parser.hpp"
+#include "../../include/imac2gl3/shapes/Colline.hpp"
+#include "../../include/xml/Univers.hpp"
 
-void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *Lamax, int *Lomax) {
+void recupererXML(Univers *univ) {
 	using namespace std;
 	
 	TiXmlDocument doc("data/univers.xml");
@@ -17,12 +20,18 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 	
 	TiXmlHandle hdl(&doc);
 	TiXmlElement *elem = hdl.FirstChildElement().Element();
+	std::cout << "Univers" << std::endl;
 	
-	elem->QueryIntAttribute("largeurMax", Lamax);
-	elem->QueryIntAttribute("longueurMax", Lomax);
-	elem->QueryIntAttribute("hauteurMax", Hamax);
+	int a,b,c;
+	elem->QueryIntAttribute("largeurMax", &a);
+	elem->QueryIntAttribute("longueurMax", &b);
+	elem->QueryIntAttribute("hauteurMax", &c);
+	(*univ).setlargeurmax(a);
+	(*univ).setlongeurmax(b);
+	(*univ).sethauteurmax(c);
 	
-	elem = hdl.FirstChildElement().FirstChildElement().Element();
+	elem = hdl.FirstChildElement("univers").FirstChildElement.Element();
+	
 	
 	std::list<imac2gl3::GLShapeInstance>::iterator i;
 	
@@ -33,21 +42,58 @@ void recupererXML(std::list<imac2gl3::GLShapeInstance> *allcube,int *Hamax,int *
 	}
 	
 	while (elem){
-	
-		imac2gl3::GLShapeInstance cubeinstance(cube);
-		elem->QueryIntAttribute("x", &cubeinstance.x);
-		elem->QueryIntAttribute("y", &cubeinstance.y);
-		elem->QueryIntAttribute("z", &cubeinstance.z);
-		(*allcube).push_back(cubeinstance);
-		 
 		
-		for(i=allcube->begin(); i!=allcube->end(); i++) {
-				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
-    		}
-	 
+		int tmplargeur;
+		int tmplongueur;
+		int tmpx;
+		int tmpy;
+		int tmpz;
+		
+		
+		if(elem == hdl.FirstChildElement().FirstChildElement("colline").Element()) {
+			
+			std::cout << "Colline" << std::endl;
+			
+			//tmplargeur =  elem->Attribute("largeur").IntValue();
+			elem->QueryIntAttribute ("largeur", &tmplargeur);
+			//tmplongueur = elem->Attribute("longueur").IntValue();
+			elem->QueryIntAttribute ("longueur", &tmplongueur);
+			//tmpx = elem->Attribute("x").IntValue();
+			elem->QueryIntAttribute ("x", &tmpx);
+			//tmpy = elem->Attribute("y").IntValue();
+			elem->QueryIntAttribute ("y", &tmpy);
+			//tmpz = elem->Attribute("z").IntValue();
+			elem->QueryIntAttribute ("z", &tmpz);
+			
+			
+			Colline hill(tmplargeur, tmplongueur, elem->Attribute("type"), tmpx, tmpy, tmpz, *univ);
+			/*std::cout << "testcolline2" << std::endl;
+			(*univ).MergeList(hill.getListCube());
+			std::cout << "testcolline3" << std::endl;
+			for(i=hill.getListCube().begin(); i!=hill.getListCube().end(); ++i) {
+				(*univ).PushCube(*i);
+			}*/
+		}
+		if(elem == hdl.FirstChildElement().FirstChildElement("cube").Element()) {
+			
+			std::cout << "Cube" << std::endl;
+			
+			imac2gl3::GLShapeInstance cubeinstance(cube);
+			elem->QueryIntAttribute("x", &cubeinstance.x);
+			elem->QueryIntAttribute("y", &cubeinstance.y);
+			elem->QueryIntAttribute("z", &cubeinstance.z);
+			(*univ).PushCube(cubeinstance);
+		
+		}
+		
 		elem = elem->NextSiblingElement(); // iteration 
 	}
-	
+		std::cout << (*univ).getList().size() << std::endl;
+		for(i=(*univ).getList().begin(); i!=(*univ).getList().end(); ++i) {
+				std::cout << "Instance Cube" << std::endl;
+				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
+    	}
 	
 }
+
 
