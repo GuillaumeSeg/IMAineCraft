@@ -76,7 +76,7 @@ void gameEngine::run(){
 		GLint MVPLocation = glGetUniformLocation(program, "uMVPMatrix");
 		
 		
-		Material matrouge(glm::vec3(15.f,1.f,1.f), glm::vec3(0.f,2.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
+		Material matrouge(glm::vec3(15.f,1.f,1.f), glm::vec3(50.f,250.f,10.f), glm::vec3(0.f,0.f,1.f), 1.1);
 		Material matbleu(glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
 	
 		MaterialUniform matuniformrouge;
@@ -107,10 +107,10 @@ void gameEngine::run(){
         		oeil.moveFront(-0.1, *univers);
         	}
         	if(left) {
-        		oeil.rotateLeft(0.5);
+        		oeil.rotateLeft(0.9);
         	}
         	if(right) {
-        		oeil.rotateLeft(-0.5);
+        		oeil.rotateLeft(-0.9);
         	}
       	
         

@@ -16,6 +16,6 @@ out vec3 fFragColor;
 uniform Material uMaterial;
 
 void main() {
-    fFragColor = vNormal + uMaterial.ambient;
+    fFragColor = vNormal;
 }
 

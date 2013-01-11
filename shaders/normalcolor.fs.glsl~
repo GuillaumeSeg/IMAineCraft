@@ -16,6 +16,6 @@ out vec3 fFragColor;
 uniform Material uMaterial;
 
 void main() {
-    fFragColor = vNormal;
+    fFragColor = gl_Color + vec4(uMaterial.diffuse,1.O);
 }
 
