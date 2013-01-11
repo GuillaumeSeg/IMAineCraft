@@ -1,0 +1,22 @@
+#ifndef _TEXTURE_H
+#define _TEXTURE_H
+
+class Texture
+{
+    protected :
+        string nom;
+        string path;
+        
+    public :
+        Texture(string name, string url);
+        ~Texture();
+        void getNom();
+        void getPath();
+        
+        //methodes OpenGL
+        void textureLoad();
+        void createTexture();
+};
+
+
+#endif

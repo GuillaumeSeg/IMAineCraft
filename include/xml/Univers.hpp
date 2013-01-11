@@ -38,6 +38,9 @@ class Univers{
 		bool youAreInsideACube (float x, float y, float z);
 		bool isOutOfUniverse (int x, int y, int z);
 
+		bool gravityCheck (float x, float y, float z);
+		void fixCubeGravity (GLShapeInstance& cube);
+
 		bool isEmpty ();
 		
 		void setlargeurmax(int a) {

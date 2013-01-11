@@ -17,4 +17,8 @@
 	<cube x="10" y="1" z="8" type="terre"></cube>
 	<colline x="21" y="1" z="4" largeur="6" longueur="6" type="cro"></colline>
 	<colline x="15" y="1" z="10" largeur="7" longueur="8" type="pyr"></colline>
+	<cube x="10" y="8" z="8" type="terre"></cube>
+	<cube x="10" y="9" z="8" type="terre"></cube>
+	<colline x="15" y="7" z="-9" largeur="7" longueur="8" type="pyr"></colline>
+	<cube x="0" y="1" z="0" type="terre"></cube>
 </univers>

@@ -33,6 +33,8 @@ void Univers::PushCube(int x, int y, int z)
 	cubeinstance.y = y;
 	cubeinstance.z = z;
 
+	fixCubeGravity (cubeinstance);
+
 	AllCube.push_back(cubeinstance);
 }
 
@@ -74,6 +76,24 @@ bool Univers::isOutOfUniverse (int x, int y, int z)
 		return true;
 	}
 	return false;
+}
+
+bool Univers::gravityCheck (float x, float y, float z)
+{
+	if (thereIsACubeHere (int(x), int(y) - 1, int(z)) || y == 1.)
+	{
+		//cout << "im falling : " << x << "," << y << "," << z << endl;
+		return true;
+	}
+	return false;
+}
+
+void Univers::fixCubeGravity (GLShapeInstance& cube)
+{
+	while (!gravityCheck (float(cube.x), float(cube.y), float(cube.z)))
+	{
+		cube.y -= 1;
+	}
 }
 
 bool Univers::isEmpty ()

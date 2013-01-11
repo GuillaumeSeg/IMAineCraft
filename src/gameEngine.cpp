@@ -43,8 +43,8 @@ void gameEngine::initCamera(FreeFlyCamera& camera, int position){
 void gameEngine::run(){
 	
 	//Création camera + initialisation
-	FreeFlyCamera regard;
-    	FreeFlyCamera oeil;
+	FreeFlyCamera regard(*univers);
+    	FreeFlyCamera oeil(*univers);
 	initCamera(oeil,-5);
 
 	//Initialisation mouvement camera

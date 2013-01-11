@@ -22,8 +22,13 @@ namespace imac2gl3 {
 		m_UpVector = cross(m_FrontVector, m_LeftVector);
 	}
 
-	FreeFlyCamera::FreeFlyCamera() {
-		m_Position = vec3(INITIAL_X, INITIAL_Y, INITIAL_Z);
+	FreeFlyCamera::FreeFlyCamera(Univers univers) {
+		float yinit = INITIAL_Y;
+		if (univers.thereIsACubeHere (INITIAL_X, yinit - 1., INITIAL_Z))
+		{
+			yinit += 1.;
+		}
+		m_Position = vec3(INITIAL_X, yinit, INITIAL_Z);
 		m_fPhi = PI;
 		m_fTheta = 0;
 		computeDirectionVectors();
@@ -49,6 +54,7 @@ namespace imac2gl3 {
 		if ((t > 0 && canMoveFront(univers)) || (t < 0 && canMoveBack(univers)))
 		{
 			m_Position += m_FrontVector*t;
+			fixGravity (univers);
 		}
 	}
 
@@ -94,6 +100,18 @@ namespace imac2gl3 {
 			return true;
 
 		return false;
+	}
+
+	void FreeFlyCamera::fixGravity (Univers univers)
+	{
+		if (!univers.gravityCheck (m_Position.x, m_Position.y, m_Position.z - 5.))
+		{
+			float new_y = m_Position.y - 1.;
+			while (m_Position.y >= new_y + 0.0001)
+			{
+				m_Position.y -= 0.0001;
+			}
+		}
 	}
 
 	bool FreeFlyCamera::collisionCube (float t, Univers univers)
