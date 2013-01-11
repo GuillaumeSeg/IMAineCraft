@@ -1,4 +1,7 @@
 #include "../include/graphicRenderer.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 #define FRAME_RATE 60
 
@@ -23,6 +26,8 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
 	ms.set(VP);
 	
 	glEnable(GL_DEPTH_TEST);
+	
+
 	
 	ms.push();
    	ms.mult(cameraOrientation.getViewMatrix());

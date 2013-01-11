@@ -1,4 +1,5 @@
 #include "../include/gameEngine.hpp"
+#include "../include/imac2gl3/lighting/Material.hpp"
 #include <list>
 #include <iostream>
 #include <SDL/SDL.h>
@@ -71,7 +72,19 @@ void gameEngine::run(){
 			exit(1);
 		}
 		glUseProgram(program);
+		
 		GLint MVPLocation = glGetUniformLocation(program, "uMVPMatrix");
+		
+		
+		Material matrouge(glm::vec3(15.f,1.f,1.f), glm::vec3(0.f,20.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
+		Material matbleu(glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
+	
+		MaterialUniform matuniformrouge;
+		MaterialUniform matuniformbleu;
+	
+		matuniformrouge.getLocations("uMaterial", program);
+		
+		matuniformrouge.sendMaterial( &matrouge);
 		
 		// Nettoyage de la fenêtre
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -1,4 +1,7 @@
 #include "../include/graphicRenderer.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 #define FRAME_RATE 60
 
@@ -24,6 +27,14 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
 	
 	glEnable(GL_DEPTH_TEST);
 	
+	Material matrouge(glm::vec3(1.f,0.f,0.f), glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
+	Material matbleu(glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), glm::vec3(0.f,0.f,1.f), 1.1);
+	
+	MaterialUniform matuniformrouge;
+	MaterialUniform matuniformbleu;
+	
+	getLocations(const char* uniform, GLuint program);
+	
 	ms.push();
    	ms.mult(cameraOrientation.getViewMatrix());
    	ms.push();
@@ -36,10 +47,10 @@ void graphicRenderer::renderUniverse(imac2gl3::FreeFlyCamera& cameraDirection, i
 	
 	// i : iterator de la liste de cubes
     std::list<imac2gl3::GLShapeInstance>::iterator i;
-    if (!universe->getList().empty())
+
+    if (!universe->isEmpty())
     {
-		for(i=universe->getList().begin(); i!=universe->getList().end(); ++i) {
-			std::cout << i->x << " HELL " << i->y << std::endl;
+		for(i=universe->getList()->begin(); i!=universe->getList()->end(); i++) {
 			ms.push();
 			ms.translate(glm::vec3(i->x,0.0f,0.0f));
 			ms.translate(glm::vec3(0.0f,i->y,0.0f));
