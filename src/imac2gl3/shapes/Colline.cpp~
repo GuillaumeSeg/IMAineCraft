@@ -1,56 +1,22 @@
-<<<<<<< HEAD
-#include "../../include/imac2gl3/shapes/Colline.hpp"
-#include "../../include/xml/Univers.hpp"
-#include <string>
-
-Colline::Colline(int largeur, int longueur, string type, int x, int y, int z) {
-
-
-	
-}
-
-void initCubesColline (Univers &univ)
-{
-	for(int i = -largeur/2; i < largeur/2; ++i) {
-		for(int j = -longueur/2; j < longueur/2; ++j) {
-		imac2gl3::Cube cube(1.f);
-		
-		imac2gl3::GLShapeInstance cubeinstance(cube);
-		
-		cubeinstance.x = i;
-		cubeinstance.y = -hauteurMax/2;
-		cubeinstance.z = j;
-		
-		AllCube.push_back(cubeinstance);
-		}
-=======
 #include <cstring>
 #include "../../../include/imac2gl3/shapes/Colline.hpp"
 #include "../../../include/xml/Univers.hpp"
 #include "../../../include/imac2gl3/shapes/Cube.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 Colline::Colline(int largeur, int longueur, const char* type, int x, int y, int z, Univers &univ) {
-	std::cout << "Test 1" << std::endl;
 	this->largeur = largeur;
 	this->longueur = longueur;
-	std::cout << "Test 2" << std::endl;
-	strcpy(this->type, type);
-	std::cout << "Test 3" << std::endl;
+	
 	this->x = x;
 	this->y = y;
 	this->z = z;
+	this->type = type;
 	
-	initCubesColline(univ);
-	
-	/*std::list<imac2gl3::GLShapeInstance>::iterator i;
-	for(i=this->cubes.begin(); i!=this->cubes.end(); i++) {
-				std::cout << "CUBE" << std::endl;
-				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
-   }*/
-	
+	initCubesColline(univ);	
 }
 
 void Colline::initCubesColline (Univers &univ)
@@ -65,96 +31,51 @@ void Colline::initCubesColline (Univers &univ)
 		compteurLayer ++;
 		largeurLayer -= 2;
 		longueurLayer -= 2;
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 	}
 }
 
 // La colline est faite de plusieurs layers de cubes
-<<<<<<< HEAD
-void initLayer (int numLayer, int largeurLayer, int longeurLayer)
-{
-	if (type.compare("pyr") || largeurLayer <= 2)
-	{
-		for(int i = -largeurLayer/2; i < largeurLayer/2; ++i) {
-			for(int j = -longueurLayer/2; j < longueurLayer/2; ++j) {
-				imac2gl3::Cube cube(1.f);
-		
-				imac2gl3::GLShapeInstance cubeinstance(cube);
-			
-=======
 void Colline::initLayer (Univers &univ, int numLayer, int largeurLayer, int longueurLayer)
 {	
 	
 	int i =0;
 	int j =0;
+	int x = 0, y = 0, z = 0;
 	imac2gl3::Cube cube(1.f);
-	if (strcmp(type,"pyr")==0 || largeurLayer <= 2)
+	if (strcmp(type.c_str(),"pyr")==0 || largeurLayer <= 2)
 	{
 		for(i = -largeurLayer/2; i < largeurLayer/2; ++i) {
 			for( j = -longueurLayer/2; j < longueurLayer/2; ++j) {
-		
-				imac2gl3::GLShapeInstance cubeinstance(cube);
 					
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
-					cubeinstance.x = i + this->x;
-					cubeinstance.y = numLayer + this->y;
-					cubeinstance.z = j + this->z;
-			
-<<<<<<< HEAD
-				this->cubes.push_back (cubeinstance);
-=======
-				//this->cubes.push_back(cubeinstance);
-				univ.PushCube(cubeinstance);
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
+				x = i + this->x;
+				y = numLayer + this->y;
+				z = j + this->z;
+
+				univ.PushCube(x, y, z,"terre");
 			}
 		}
 	}
 	else
 	{
-<<<<<<< HEAD
-		for(int i = -largeurLayer/2 + 1; i < largeurLayer/2 - 1; ++i) {
-			for(int j = -longueurLayer/2; j < longueurLayer/2; ++j) {
-				imac2gl3::Cube cube(1.f);
-=======
 		for( i = -largeurLayer/2 + 1; i < largeurLayer/2 - 1; ++i) {
 			for( j = -longueurLayer/2; j < longueurLayer/2; ++j) {
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
-		
-				imac2gl3::GLShapeInstance cubeinstance(cube);
 			
-					cubeinstance.x = i + this->x;
-					cubeinstance.y = numLayer + this->y;
-					cubeinstance.z = j + this->z;
-			
-<<<<<<< HEAD
-				this->cubes.push_back (cubeinstance);
-			}
-		}
-		for(int j = -longueurLayer/2 + 1; j < longueurLayer/2 - 1; ++j) {
-			for (int i = -largeurLayer/2; i < largeurLayer/2; i = i + largeurLayer - 1)
-			imac2gl3::Cube cube(1.f);
-=======
-				//this->cubes.push_back(cubeinstance);
-				univ.PushCube(cubeinstance);
+				x = i + this->x;
+				y = numLayer + this->y;
+				z = j + this->z;
+
+				univ.PushCube(x, y, z, type);
 			}
 		}
 		for( j = -longueurLayer/2 + 1; j < longueurLayer/2 - 1; ++j) {
 			for ( i = -largeurLayer/2; i < largeurLayer/2; i = i + largeurLayer - 1) {
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 	
-			imac2gl3::GLShapeInstance cubeinstance(cube);
-		
-				cubeinstance.x = i + this->x;
-				cubeinstance.y = numLayer + this->y;
-				cubeinstance.z = j + this->z;
-		
-<<<<<<< HEAD
-			this->cubes.push_back (cubeinstance);
-=======
-			//this->cubes.push_back(cubeinstance);
-			univ.PushCube(cubeinstance);
+				x = i + this->x;
+				y = numLayer + this->y;
+				z = j + this->z;
+
+				univ.PushCube(x, y, z, type);
 			}
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
 		}
 	}
 }

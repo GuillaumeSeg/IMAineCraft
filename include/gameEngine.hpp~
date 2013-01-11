@@ -25,11 +25,7 @@ class gameEngine
 	
 		//methode
 		gameEngine(graphicRenderer* renderer);
-		~gameEngine(){
-			SDL_Quit();
-			delete gRenderer;
-			delete univers;
-		} 
+		~gameEngine(){} 
 		/*void affectUnivers();*/
 		void run();
 		void initSDL();
