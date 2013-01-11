@@ -1,0 +1,31 @@
+#ifndef _TEXTURE_MANAGER_
+#define _TEXTURE_MANAGER_
+
+#include <vector>
+#include "Texture.hpp"
+
+template <class Texture>
+class textureManager
+{
+    public :
+        static textureManager* Instance(); 
+        void initTextures(); 
+        void addTexture(Texture* texture); //ajouter une texture à la collection
+        void deleteTexture(Texture* texture); //supprimer une texture de la collection
+        Texture* getTexture(string name);
+
+    protected :
+        textureManager();
+        ~textureManager();
+        //Instanciation d'une texture
+        void textureInstance();
+
+    private :
+        static textureManager* _instance;
+        vector<Texture> collecTextures;
+};
+
+
+#endif
+
+//gestion de l'instanciation des textures en Singleton. On attribue le meme objet texture à chaque objet du meme type texture.

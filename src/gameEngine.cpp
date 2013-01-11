@@ -27,6 +27,7 @@ gameEngine::gameEngine(graphicRenderer* renderer){
         exit(1);
     }
 	univers = new Univers;
+	gRenderer->universe = univers;
 }
 
 void gameEngine::initSDL(){
@@ -44,8 +45,8 @@ void gameEngine::initCamera(FreeFlyCamera& camera, int position){
 void gameEngine::run(){
 	
 	//Création camera + initialisation
-	FreeFlyCamera regard;
-    	FreeFlyCamera oeil;
+	FreeFlyCamera regard(*univers);
+    	FreeFlyCamera oeil(*univers);
 	initCamera(oeil,-5);
 
 	//Initialisation mouvement camera
@@ -90,7 +91,7 @@ void gameEngine::run(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//rendu de l'univers
-		gRenderer->renderUniverse(oeil,regard,univers,MVPLocation);
+		gRenderer->renderUniverse(oeil,regard,MVPLocation);
 		
         
         

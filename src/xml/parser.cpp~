@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <list>
+#include <string>
 #include "../../include/imac2gl3/shapes/Cube.hpp"
 #include "../../include/imac2gl3/shapes/GLShapeInstance.hpp"
 #include "../../include/xml/tinyxml.h"
@@ -8,20 +9,22 @@
 #include "../../include/imac2gl3/shapes/Colline.hpp"
 #include "../../include/xml/Univers.hpp"
 
+
+using namespace std;
+using namespace imac2gl3;
+
 void recupererXML(Univers *univ) {
-	using namespace std;
-	
+
 	TiXmlDocument doc("data/univers.xml");
 	if(!doc.LoadFile()){
-   	cerr << "erreur lors du chargement" << endl;
-   	cerr << "error #" << doc.ErrorId() << " : " << doc.ErrorDesc() << endl;
-   	exit(1);
+	cerr << "erreur lors du chargement" << endl;
+	cerr << "error #" << doc.ErrorId() << " : " << doc.ErrorDesc() << endl;
+	exit(1);
 	}
-	
+
 	TiXmlHandle hdl(&doc);
 	TiXmlElement *elem = hdl.FirstChildElement().Element();
-	std::cout << "Univers" << std::endl;
-	
+
 	int a,b,c;
 	elem->QueryIntAttribute("largeurMax", &a);
 	elem->QueryIntAttribute("longueurMax", &b);
@@ -29,87 +32,50 @@ void recupererXML(Univers *univ) {
 	(*univ).setlargeurmax(a);
 	(*univ).setlongeurmax(b);
 	(*univ).sethauteurmax(c);
-	
-	elem = hdl.FirstChildElement("univers").FirstChildElement.Element();
-	
-	
-	std::list<imac2gl3::GLShapeInstance>::iterator i;
-	
-	imac2gl3::Cube cube(1.f);
+
+	elem = hdl.FirstChildElement("univers").FirstChildElement().Element();
+
+
+	list<GLShapeInstance>::iterator i;
+
+	Cube cube(1.f);
 	if(!elem){
-		cerr << "le noeud à atteindre n'existe pas" << endl;
-		exit(1);
+	cerr << "le noeud à atteindre n'existe pas" << endl;
+	exit(1);
 	}
-	
 	while (elem){
-<<<<<<< HEAD
-		
 	
-		imac2gl3::GLShapeInstance cubeinstance(cube);
-		elem->QueryIntAttribute("x", &cubeinstance.x);
-		elem->QueryIntAttribute("y", &cubeinstance.y);
-		elem->QueryIntAttribute("z", &cubeinstance.z);
-		(*allcube).push_back(cubeinstance);
-		 
-		
-/*		for(i=allcube->begin(); i!=allcube->end(); i++) {
-				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
-    		}*/
-	 
-=======
-		
-		int tmplargeur;
+		/nt tmplargeur;
 		int tmplongueur;
 		int tmpx;
 		int tmpy;
 		int tmpz;
+	
+		if (strcmp (elem->Value (), "colline") == 0) {
 		
-		
-		if(elem == hdl.FirstChildElement().FirstChildElement("colline").Element()) {
-			
-			std::cout << "Colline" << std::endl;
-			
-			//tmplargeur =  elem->Attribute("largeur").IntValue();
 			elem->QueryIntAttribute ("largeur", &tmplargeur);
-			//tmplongueur = elem->Attribute("longueur").IntValue();
 			elem->QueryIntAttribute ("longueur", &tmplongueur);
-			//tmpx = elem->Attribute("x").IntValue();
 			elem->QueryIntAttribute ("x", &tmpx);
-			//tmpy = elem->Attribute("y").IntValue();
 			elem->QueryIntAttribute ("y", &tmpy);
-			//tmpz = elem->Attribute("z").IntValue();
 			elem->QueryIntAttribute ("z", &tmpz);
-			
-			
+		
+		
 			Colline hill(tmplargeur, tmplongueur, elem->Attribute("type"), tmpx, tmpy, tmpz, *univ);
-			/*std::cout << "testcolline2" << std::endl;
-			(*univ).MergeList(hill.getListCube());
-			std::cout << "testcolline3" << std::endl;
-			for(i=hill.getListCube().begin(); i!=hill.getListCube().end(); ++i) {
-				(*univ).PushCube(*i);
-			}*/
 		}
-		if(elem == hdl.FirstChildElement().FirstChildElement("cube").Element()) {
-			
-			std::cout << "Cube" << std::endl;
-			
-			imac2gl3::GLShapeInstance cubeinstance(cube);
-			elem->QueryIntAttribute("x", &cubeinstance.x);
-			elem->QueryIntAttribute("y", &cubeinstance.y);
-			elem->QueryIntAttribute("z", &cubeinstance.z);
-			(*univ).PushCube(cubeinstance);
+
+		if (strcmp (elem->Value (), "cube") == 0) {
 		
+			elem->QueryIntAttribute ("x", &tmpx);
+			elem->QueryIntAttribute ("y", &tmpy);
+			elem->QueryIntAttribute ("z", &tmpz);
+			std::string type;
+			type = elem->Attribute("type");
+			univ->PushCube (tmpx, tmpy, tmpz, type);
+	
 		}
-		
->>>>>>> ef580c3054c886b5ae63a9b44ad1f13d6c26c636
+
 		elem = elem->NextSiblingElement(); // iteration 
 	}
-		std::cout << (*univ).getList().size() << std::endl;
-		for(i=(*univ).getList().begin(); i!=(*univ).getList().end(); ++i) {
-				std::cout << "Instance Cube" << std::endl;
-				std::cout << i->x << "  " << i->y << " " << i->z << std::endl;
-    	}
-	
 }
 
 

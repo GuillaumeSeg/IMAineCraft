@@ -25,13 +25,16 @@ private :
 	void computeDirectionVectors();
 
 public:
-	FreeFlyCamera();
+	FreeFlyCamera(Univers univers);
 
 	vec3 getFrontVector ();
 	vec3 getPosition ();
 
 	bool canMoveFront (Univers univers);
 	bool canMoveBack (Univers univers);
+
+	void fixGravity (Univers univers);
+
 	bool collisionCube (float t, Univers univers);
 
 	void moveLeft(float t);

@@ -3,16 +3,18 @@
 #include "../../../include/xml/Univers.hpp"
 #include "../../../include/imac2gl3/shapes/Cube.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 Colline::Colline(int largeur, int longueur, const char* type, int x, int y, int z, Univers &univ) {
 	this->largeur = largeur;
 	this->longueur = longueur;
-	strcpy(this->type, type);
+	
 	this->x = x;
 	this->y = y;
 	this->z = z;
+	this->type = type;
 	
 	initCubesColline(univ);	
 }
@@ -40,7 +42,7 @@ void Colline::initLayer (Univers &univ, int numLayer, int largeurLayer, int long
 	int j =0;
 	int x = 0, y = 0, z = 0;
 	imac2gl3::Cube cube(1.f);
-	if (strcmp(type,"pyr")==0 || largeurLayer <= 2)
+	if (strcmp(type.c_str(),"pyr")==0 || largeurLayer <= 2)
 	{
 		for(i = -largeurLayer/2; i < largeurLayer/2; ++i) {
 			for( j = -longueurLayer/2; j < longueurLayer/2; ++j) {
@@ -49,7 +51,7 @@ void Colline::initLayer (Univers &univ, int numLayer, int largeurLayer, int long
 				y = numLayer + this->y;
 				z = j + this->z;
 
-				univ.PushCube(x, y, z);
+				univ.PushCube(x, y, z,"terre");
 			}
 		}
 	}
@@ -62,7 +64,7 @@ void Colline::initLayer (Univers &univ, int numLayer, int largeurLayer, int long
 				y = numLayer + this->y;
 				z = j + this->z;
 
-				univ.PushCube(x, y, z);
+				univ.PushCube(x, y, z, "terre");
 			}
 		}
 		for( j = -longueurLayer/2 + 1; j < longueurLayer/2 - 1; ++j) {
@@ -72,7 +74,7 @@ void Colline::initLayer (Univers &univ, int numLayer, int largeurLayer, int long
 				y = numLayer + this->y;
 				z = j + this->z;
 
-				univ.PushCube(x, y, z);
+				univ.PushCube(x, y, z, "terre");
 			}
 		}
 	}
